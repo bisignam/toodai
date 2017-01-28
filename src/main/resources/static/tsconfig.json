@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"rootDir": "app",
+		"outDir": "target/app",
+		"target": "es5",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"sourceMap": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"lib": [
+			"es2015",
+			"dom"
+		],
+		"noImplicitAny": true,
+		"suppressImplicitAnyIndexErrors": true
+	},
+	"include": [
+		"app/**/*"
+	],
+	"exclude": [
+		"node_modules",
+		"e2e/**/*"
+	]
+}
