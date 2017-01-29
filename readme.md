@@ -1,4 +1,0 @@
-##Dep
-
-- npm
-- npm copyfiles
