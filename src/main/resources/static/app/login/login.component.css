@@ -1,0 +1,4 @@
+/* Prevent chrome auto-fill yellow color */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}

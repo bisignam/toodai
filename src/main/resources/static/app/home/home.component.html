@@ -1,0 +1,14 @@
+<nav>
+ <a routerLink="/home" routerLinkActive="active" >Home</a>
+ <a routerLink="/links" routerLinkActive="active">Links</a>
+</nav>
+<router-outlet></router-outlet>
+<h3>Your Top Links</h3>
+<div class="grid grid-pad">
+  <a *ngFor="let link of links" [routerLink]="['/detail', link.id]" class="col-1-4">
+    <div class="module link">
+      <h4>{{link.title}}</h4>
+    </div>
+  </a>
+</div>
+<link-search></link-search>

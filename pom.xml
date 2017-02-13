@@ -13,6 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<start-class>ch.bisi.toodai.Toodai</start-class>
 		<java.version>1.8</java.version>
+		<jjwt.version></jjwt.version>
 	</properties>
 
 	<parent>
@@ -41,6 +42,16 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.5</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -92,7 +103,7 @@
 						<id>exec-npm-install</id>
 						<phase>generate-sources</phase>
 						<configuration>
-							<workingDirectory>${project.basedir}/src/main/resources/static</workingDirectory>
+							<workingDirectory>${project.basedir}/src/main/resources/static/js</workingDirectory>
 							<executable>npm</executable>
 							<arguments>
 								<argument>install</argument>
@@ -106,7 +117,7 @@
 						<id>exec-npm-run-tsc</id>
 						<phase>generate-sources</phase>
 						<configuration>
-							<workingDirectory>${project.basedir}/src/main/resources/static</workingDirectory>
+							<workingDirectory>${project.basedir}/src/main/resources/static/js</workingDirectory>
 							<executable>npm</executable>
 							<arguments>
 								<argument>run</argument>
