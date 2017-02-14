@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers } from '@angular/http';  
+import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { Link } from './link';
 
@@ -9,7 +9,7 @@ import 'rxjs/add/operator/toPromise';
 export class LinkService {
 		private linkUrls = 'api/links';
 		private headers = new Headers({'Content-Type': 'application/json'});
-		constructor(private http: AuthHttp){}
+		constructor(private http: AuthHttp) { };
 		handleError(error: any): Promise<any> {
 				console.error('An error occurred', error);
 				return Promise.reject(error.message || error);
@@ -24,7 +24,7 @@ export class LinkService {
 						.then(links => links.find(link => link.id === id));
 		}
 		update(link: Link): Promise<Link> {
-				const url = `${this.linkUrls}/${link.id}`; //apici bash like :D
+				const url = `${this.linkUrls}/${link.id}`;
 				return this.http.put(url, JSON.stringify(link), {headers : this.headers})
 						.toPromise()
 						.then(() => link)

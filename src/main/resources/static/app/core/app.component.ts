@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-
-//This is a so called 'Router Component':
-// - it is attached to a router and displays routed views since we are using the router-outlet directive
+import { AuthService } from '../auth/auth.service';
 
 @Component({
-  moduleId: module.id,
-  selector: 'my-app',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+	moduleId: module.id,
+	selector: 'my-app',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css'],
 })
 
 export class AppComponent {
-  title = 'Toodai';
+	title = 'Toodai';
+	constructor(private authService: AuthService) { }
 }

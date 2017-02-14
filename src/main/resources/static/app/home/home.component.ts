@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Link } from '../link/link'
+import { Link } from '../link/link';
 import { LinkService } from '../link/link.service';
 
 @Component ({
@@ -10,12 +10,12 @@ import { LinkService } from '../link/link.service';
 })
 
 export class HomeComponent implements OnInit {
+		links: Link[];
 		constructor(private linkService: LinkService) { };
 		ngOnInit(): void {
 				this.getLinks();
-		}
-		links: Link[];
+		};
 		getLinks(): void {
 				this.linkService.getLinks().then(links => this.links = links.slice(1, 5));
-		}
+		};
 }

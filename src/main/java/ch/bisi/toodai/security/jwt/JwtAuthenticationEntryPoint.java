@@ -1,7 +1,6 @@
 package ch.bisi.toodai.security.jwt;
 
 import java.io.IOException;
-import java.io.Serializable;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
