@@ -8,7 +8,7 @@ import { Link } from '../link';
 
 @Injectable()
 export class LinkSearchService {
-		constructor(private http: AuthHttp){}
+		constructor(private http: AuthHttp) {}
 		search(term: string): Observable<Link[]> {
 				return this.http
 						.get(`api/links?title=${term}`)

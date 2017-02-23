@@ -1,3 +1,4 @@
+import { ErrorComponent } from './../error/error.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -20,8 +21,6 @@ import { NotAuthGuard } from '../guards/not-auth.guard';
 import { AuthService } from '../auth/auth.service';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
-// import {NgbModule} from 'ng2-bootstrap/ng2-bootstrap'; we need to import single modules
-
 function authHttpServiceFactory(http: Http, options: RequestOptions) {
 	return new AuthHttp(new AuthConfig({
 		tokenName: 'token',
@@ -36,7 +35,6 @@ function authHttpServiceFactory(http: Http, options: RequestOptions) {
 		AppRoutingModule,
 		HttpModule,
 		JsonpModule
-		//    NgbModule.forRoot(),
 		// InMemoryWebApiModule.forRoot(InMemoryDataService)
 	],
 	declarations: [
@@ -45,7 +43,8 @@ function authHttpServiceFactory(http: Http, options: RequestOptions) {
 		HomeComponent,
 		LinkDetailComponent,
 		LinkSearchComponent,
-		LoginComponent
+		LoginComponent,
+		ErrorComponent
 	],
 	providers: [
 		LinkService,

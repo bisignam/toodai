@@ -11,7 +11,10 @@
 				<input (keyup.enter)="login(username.value, password.value)" type="password" class="form-control" #password placeholder="enter password"
 					id="pwd">
 			</div>
-			<button type="submit" class="btn btn-lg btn-primary btn-block" (click)="login(username.value, password.value)">Login</button>
+			<div class="form-group">
+				<button type="submit" class="btn btn-lg btn-primary btn-block" (click)="login(username.value, password.value)">Login</button>
+			</div>
+			<error [error]="error"></error>
 		</div>
 	</div>
 	<div>
