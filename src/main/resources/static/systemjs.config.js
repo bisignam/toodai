@@ -23,9 +23,6 @@
       '@angular/router': 'npm:@angular/router/bundles/router.umd.js',
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
 
-      //bootstrap directives for angular2
-      'ng2-bootstrap/ng2-bootstrap': 'node_modules/ng2-bootstrap/bundles/ng2-bootstrap.umd.js',
-      
       //angular-jwt
       'angular2-jwt': 'node_modules/angular2-jwt/angular2-jwt.js',
       
