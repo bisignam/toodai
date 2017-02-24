@@ -1,0 +1,2 @@
+INSERT INTO users (username, password, enabled) VALUES ('mario', '$2a$10$WXoyyr0B9koAcfSpq0rlJOb75Z7xbnRyo8YQQi3r8m9Ox.ixk.0pq', true);
+INSERT INTO authorities (username, authority) VALUES ('mario', 'USER');
