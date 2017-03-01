@@ -11,14 +11,14 @@ import ch.bisi.toodai.dto.Bookmark;
 import ch.bisi.toodai.service.BookmarkService;
 
 @RestController
-@RequestMapping("/api/links")
+@RequestMapping("/api/bookmarks")
 public class BookmarksController {
 	
 	@Autowired
 	private BookmarkService bookmarkService;
 
 	@RequestMapping
-	public List<Bookmark> getBookmarks(@RequestParam(value = "userId", required = true) Long userId) {
-		return bookmarkService.findByUser(userId);
+	public List<Bookmark> getBookmarks(@RequestParam(value = "user", required = true) String username) {
+		return bookmarkService.findByUser(username);
 	}
 }

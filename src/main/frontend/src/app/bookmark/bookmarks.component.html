@@ -1,0 +1,22 @@
+<div>
+<label>bookmark title:</label><input #bookmarkTitle />
+<label>bookmark url:</label><input #bookmarkUrl />
+<button (click)="add(bookmarkTitle.value, bookmarkUrl.value); bookmarkTitle.value=''; bookmarkUrl.value=''">
+Add bookmark
+</button>
+</div> 
+<ul class="bookmarks">
+	<li *ngFor="let bookmark of bookmarks" 
+			[class.selected]="bookmark === selectedbookmark"
+			(click)="onSelect(bookmark)">
+		<span class="badge">{{bookmark.id}}</span> 
+		<span>{{bookmark.title}}</span>
+		<button class="delete" (click)="delete(bookmark); $event.stopPropagation()">x</button> <!-- stop propagation prevents the selection of the current li element when remnoving it !-->
+	</li>
+</ul>
+<div *ngIf="selectedbookmark">
+	<h2>
+		{{ selectedbookmark.name | uppercase }} is my bookmark
+	</h2>
+	<button (click)="gotoDetail()">View Details</button>
+</div>

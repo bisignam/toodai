@@ -1,0 +1,20 @@
+<div class="container">
+	<div class="row">
+		<div class="col-xs-4 col-xs-offset-4">
+			<div class="form-group">
+				<label for="usr">Username:</label>
+				<input (keyup.enter)="login(username.value, password.value)" type="text" class="form-control" #username placeholder="enter username or email"
+					id="usr">
+			</div>
+			<div class="form-group">
+				<label for="pwd">Password:</label>
+				<input (keyup.enter)="login(username.value, password.value)" type="password" class="form-control" #password placeholder="enter password"
+					id="pwd">
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-lg btn-primary btn-block" (click)="login(username.value, password.value)">Login</button>
+			</div>
+			<tod-error [error]="error"></tod-error>
+		</div>
+	</div>
+	<div>

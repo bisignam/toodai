@@ -2,8 +2,6 @@ target
 .classpath
 .settings
 .project
-.vscode
-src/main/resources/static/node_modules
-src/main/resources/static/target/
+src/main/resources/static
 src/main/java/ch/bisi/toodai/jooqgenerated
 *.log
