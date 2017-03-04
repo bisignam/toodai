@@ -21,6 +21,7 @@
 		<java.version>1.8</java.version>
 		<apache.commons.lang.version>3.5</apache.commons.lang.version>
 		<jjwt.version>0.7.0</jjwt.version>
+		<!-- overwrites spring-boot version -->
 		<flyway.version>4.1.1</flyway.version>
 	</properties>
 
@@ -52,6 +53,11 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
@@ -72,7 +78,6 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
-			<version>${flyway.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -90,7 +95,7 @@
 		</resources>
 		<pluginManagement>
 			<plugins>
-				<!--Tells to m2e eclipse plugin to ignore goals triggered by flyway, jooq, exec-maven plugins -->
+				<!--Tells to m2e eclipse plugin to ignore actions triggered by flyway, jooq and exec-maven plugins -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -144,6 +149,17 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>woff</nonFilteredFileExtension>
+						<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+						<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>properties-maven-plugin</artifactId>
@@ -242,7 +258,7 @@
 							<workingDirectory>${project.basedir}/src/main/frontend</workingDirectory>
 							<executable>npm</executable>
 							<arguments>
-								<argument>run</argument>w
+								<argument>run</argument>
 								<argument>build</argument>
 								<argument>--output-path=../resources/static</argument>
 							</arguments>
