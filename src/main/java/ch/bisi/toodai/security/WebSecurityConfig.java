@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private javax.sql.DataSource dataSource;
 
 	/** Paths not subject to the authentication process **/
-	private String[] unsecuredPaths = new String[]{"/", "/**/*.css", "/**/*.html", "/**/*.js", "/**/*.png", "/favicon.ico", "/login", "/home"};
+	private String[] unsecuredPaths = new String[]{"/", "/**/*.css", "/**/*.html", "/**/*.js", "/**/*.woff", "/**/*.woff2", "/**/*.ttf", "/favicon.ico", "/login", "/home"};
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
