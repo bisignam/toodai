@@ -5,3 +5,4 @@ target
 src/main/resources/static
 src/main/java/ch/bisi/toodai/jooqgenerated
 *.log
+.history

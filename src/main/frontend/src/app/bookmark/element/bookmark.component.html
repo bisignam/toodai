@@ -1,0 +1,35 @@
+<li class="list-group-item row bookmark">
+    <div class="col-xs-2 bookmark-image-container">
+        <div class="row">
+            <img class="img-responsive bookmark-image" src="{{getFaviconUrl()}}">
+        </div>
+    </div>
+    <div class="col-xs-10 bookmark-info-container">
+        <div class="row">
+            <h4><a class="title" href="{{bookmark.url}}" target="_blank">
+						{{bookmark.title}}</a></h4>
+        </div>
+        <div class="row">
+            <a class="description-link" (click)="isDescriptionCollapsed = !isDescriptionCollapsed">Show Description
+		</a>
+            <div class="row">
+                <div [collapse]="isDescriptionCollapsed" class="card card-block card-header">
+                    <div class="well well-xs">{{bookmark.description}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <ng-container *ngFor="let tag of bookmark.tags">
+                <span class="label label-primary">{{tag}}</span>
+            </ng-container>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-offset-10 col-xs-2 buttons">
+            <div class="btn-group btn-group-justified">
+                <a class="btn btn-link btn-xs"><span class="glyphicon glyphicon-edit" ></span></a>
+                <a class="btn btn-link btn-xs"><span class="glyphicon glyphicon-trash" ></span></a>
+            </div>
+        </div>
+    </div>
+</li>

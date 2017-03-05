@@ -10,7 +10,7 @@ export class NotAuthGuard implements CanActivate {
 		if (!this.authService.loggedIn()) {
 			return true;
 		}
-		this.router.navigate(['/home']);
+		this.router.navigate(['/bookmarks']);
 		return false;
 	}
 

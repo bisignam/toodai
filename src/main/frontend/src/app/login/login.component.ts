@@ -16,7 +16,8 @@ export class LoginComponent {
 		this.clearErrors();
 		return this.authService.login(username, password).subscribe(
 			data => {
-				this.router.navigate(['/home']);
+				console.log('INIT');
+				this.router.navigate(['/bookmarks']);
 			},
 			error => {
 				this.displayErrors(error);

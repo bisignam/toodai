@@ -1,0 +1,39 @@
+@import '../../../styles.less';
+
+@list-group-border-radius: 0;
+@well-border: darken(@list-group-bg, 17%);
+
+.bookmark-image-container {
+	margin-right: 10 px;
+}
+
+.bookmark-image {
+	margin: inherit;
+	border-radius: 25px;
+	-webkit-box-shadow: 1.5px 1.5px 1px lightgray;
+	box-shadow: 1.5px 1.5px 1px lightgray;
+}
+
+.bookmark {
+	border-top: none;
+	border-bottom: 1px solid @link-color;
+	border-left: none;
+	border-right: none;
+}
+
+.bookmark:hover a.title {
+	color: saturate(lighten(@link-color, 20%), 10%);
+	transition: 0.2s ease;
+}
+.bookmark:hover div.buttons {
+	display: block;
+	transition: 0.2s ease;
+}
+
+div.buttons {
+	display: none;
+}
+
+.description-link {
+	cursor: pointer;
+}

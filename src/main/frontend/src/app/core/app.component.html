@@ -1,15 +1,20 @@
 <nav class="navbar navbar-default">
-	<div class="container-fluid">
-		<!-- not fixed size container from bootstrap -->
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">TOODAI</a>
-		</div>
-		<ul class="nav navbar-nav navbar-right">
-			<li routerLinkActive="active"><a routerLink="/about" routerLinkActive="active"><span class="	glyphicon glyphicon-info-sign"></span> About</a></li>
-			<li *ngIf="!authService.loggedIn()" routerLinkActive="active"><a routerLink="/login" routerLinkActive="active"><span class="glyphicon glyphicon-log-in"></span> Sign In</a></li>
-			<li *ngIf="!authService.loggedIn()" routerLinkActive="active"><a routerLink="/registration" routerLinkActive="active"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-			<li *ngIf="authService.loggedIn()"  routerLinkActive="active"><a routerLink="/home" (click)="authService.logout()"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-		</ul>
-	</div>
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">{{title}}</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li *ngIf="!authService.loggedIn()" routerLinkActive="active"><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li *ngIf="!authService.loggedIn()" routerLinkActive="active"><a routerLink="/registration"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li *ngIf="authService.loggedIn()" routerLinkActive="active"><a routerLink="/bookmarks"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+            <div *ngIf="authService.loggedIn()" class="btn-group" dropdown>
+                <button id="user-actions-dropdown-button" type="button" class="btn btn-link navbar-btn" dropdownToggle><span class="glyphicon glyphicon-user"></span><span class="caret"></span>
+                </button>
+                <ul dropdownMenu>
+                    <li (click)="authService.logout()"><a class="dropdown-item "><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
+        </ul>
+    </div>
 </nav>
 <router-outlet></router-outlet>
