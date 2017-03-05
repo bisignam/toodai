@@ -1,26 +1,26 @@
 <li class="list-group-item row bookmark">
-    <div class="col-xs-2 bookmark-image-container">
-        <div class="row">
+    <div class="col-xs-2">
+        <div class="row bookmark-image-container">
             <img class="img-responsive bookmark-image" src="{{getFaviconUrl()}}">
         </div>
     </div>
     <div class="col-xs-10 bookmark-info-container">
         <div class="row">
-            <h4><a class="title" href="{{bookmark.url}}" target="_blank">
-						{{bookmark.title}}</a></h4>
+            <a class="bookmark-title" href="{{bookmark.url}}" target="_blank">
+						{{bookmark.title}}</a>
         </div>
-        <div class="row">
-            <a class="description-link" (click)="isDescriptionCollapsed = !isDescriptionCollapsed">Show Description
-		</a>
-            <div class="row">
+        <div class="row description-container">
+            <a class="description-link" (click)="isDescriptionCollapsed=!isDescriptionCollapsed">Show Description<span class="caret"></span>
+			</a>
+            <div class="row description-content">
                 <div [collapse]="isDescriptionCollapsed" class="card card-block card-header">
-                    <div class="well well-xs">{{bookmark.description}}</div>
+                    <div class="well well-xs description-well">{{bookmark.description}}</div>
                 </div>
             </div>
         </div>
-        <div class="row ">
+        <div class="row tags">
             <ng-container *ngFor="let tag of bookmark.tags">
-                <span class="label label-primary">{{tag}}</span>
+                <span class="label label-primary tag">{{tag}}</span>
             </ng-container>
         </div>
     </div>

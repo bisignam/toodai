@@ -3,17 +3,9 @@
 @list-group-border-radius: 0;
 @well-border: darken(@list-group-bg, 17%);
 
-.bookmark-image-container {
-	margin-right: 10 px;
-}
+@bookmark-title-font-size: @font-size-h4; 
 
-.bookmark-image {
-	margin: inherit;
-	border-radius: 25px;
-	-webkit-box-shadow: 1.5px 1.5px 1px lightgray;
-	box-shadow: 1.5px 1.5px 1px lightgray;
-}
-
+//base
 .bookmark {
 	border-top: none;
 	border-bottom: 1px solid @link-color;
@@ -21,19 +13,66 @@
 	border-right: none;
 }
 
-.bookmark:hover a.title {
+//image
+.bookmark-image-container {
+	margin-right: 0px;
+}
+
+.bookmark-image {
+	border-radius: 25px;
+	-webkit-box-shadow: 1.5px 1.5px 1px lightgray;
+	box-shadow: 1.5px 1.5px 1px lightgray;
+}
+
+
+//title
+.bookmark a.bookmark-title {
+	font-size: @bookmark-title-font-size;
+}
+
+.bookmark:hover a.bookmark-title {
 	color: saturate(lighten(@link-color, 20%), 10%);
 	transition: 0.2s ease;
 }
-.bookmark:hover div.buttons {
-	display: block;
-	transition: 0.2s ease;
-}
 
-div.buttons {
-	display: none;
-}
 
+// collapsable description
 .description-link {
 	cursor: pointer;
+}
+
+.description-link span.caret {
+	margin-left: 5px;
+}
+
+.description-container {
+	margin-top: 10px;
+}
+
+.description-well {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+
+// tags
+.bookmark .tags {
+	margin-top: 10px;
+}
+
+.bookmark .tag {
+	font-size: @bookmark-title-font-size; 
+	margin-top: inherit;
+	display:inline-block;
+}
+
+// buttons
+div.buttons {
+	margin-top: 20px;
+	visibility: hidden;
+}
+
+.bookmark:hover div.buttons {
+	visibility: visible;
+	transition: 0.2s ease;
 }
