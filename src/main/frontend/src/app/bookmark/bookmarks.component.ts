@@ -13,7 +13,6 @@ import { BookmarkService } from './bookmark.service';
 export class BookmarksComponent implements OnInit {
 	bookmarks: Bookmark[];
 	ngOnInit(): void {
-		console.log('INIT');
 		this.getBookmarks();
 	};
 	constructor(
@@ -22,10 +21,6 @@ export class BookmarksComponent implements OnInit {
 		private authService: AuthService
 	) { };
 	getBookmarks(): void {
-		console.log('CALLINGG');
-		this.bookmarkService.getBookmarks(this.authService.getLoggedUser()).then(bookmarks => {
-			 this.bookmarks = bookmarks;
-			console.log(bookmarks);
-		});
+		this.bookmarkService.getBookmarks(this.authService.getLoggedUser()).then(bookmarks => this.bookmarks = bookmarks);
 	};
 }
