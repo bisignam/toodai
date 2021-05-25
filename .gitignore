@@ -1,10 +1,26 @@
-*.iml
-*.idea
-target
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
 .classpath
-.settings
+.factorypath
 .project
-src/main/resources/static
-src/main/java/ch/bisi/toodai/jooqgenerated
-*.log
-.history
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+.vscode/settings.json
+/src/main/resources/docker/data/

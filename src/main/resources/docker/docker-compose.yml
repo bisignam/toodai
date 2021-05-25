@@ -1,0 +1,26 @@
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017 #this is the default port
+    volumes:
+      - '~/.toodai/data:/data/db' #the first part before : is the host directory where you want to store mongodb data
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+
+  toodai:
+    build:
+      context: ../../../../
+      dockerfile: src/main/resources/docker/backend/Dockerfile
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATA_MONGODB_URI: "mongodb://root:root@mongo:27017/toodai?authSource=admin"
