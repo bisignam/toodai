@@ -1,5 +1,6 @@
 package ch.bisignam.toodai.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -18,6 +19,8 @@ public class Bookmark {
   private String url;
   private String description;
   private List<String> tags;
+  private Boolean toRead;
+  private LocalDateTime creationDateTime;
   @DBRef
   private User user;
 
@@ -67,5 +70,21 @@ public class Bookmark {
 
   public void setUser(User user) {
     this.user = user;
+  }
+
+  public Boolean getToRead() {
+    return toRead;
+  }
+
+  public void setToRead(Boolean toRead) {
+    this.toRead = toRead;
+  }
+
+  public LocalDateTime getCreationDateTime() {
+    return creationDateTime;
+  }
+
+  public void setCreationDateTime(LocalDateTime creationDateTime) {
+    this.creationDateTime = creationDateTime;
   }
 }

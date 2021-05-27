@@ -7,6 +7,7 @@ import ch.bisignam.toodai.model.User;
 import ch.bisignam.toodai.repository.BookmarkRepository;
 import ch.bisignam.toodai.security.SecurityUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.primitives.Booleans;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.BooleanUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -71,6 +73,8 @@ public class BookmarkService {
         BookmarkDTO bookmarkDTO = new BookmarkDTO();
         bookmarkDTO.setUrl(importedBookmark.getHref());
         bookmarkDTO.setDescription(importedBookmark.getDescription());
+        bookmarkDTO.setToRead(BooleanUtils.toBoolean(importedBookmark.getToread(), "yes", "no"));
+        bookmarkDTO.setCreationDateTime(importedBookmark.getTime());
         bookmarkDTO.setTags(Arrays.asList(importedBookmark.getTags().split(" ")));
         bookmarksToImport.add(bookmarkDTO);
       }

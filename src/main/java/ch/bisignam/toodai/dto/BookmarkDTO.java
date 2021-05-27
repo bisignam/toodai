@@ -1,5 +1,6 @@
 package ch.bisignam.toodai.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class BookmarkDTO {
@@ -8,6 +9,8 @@ public class BookmarkDTO {
   private String url;
   private String description;
   private List<String> tags;
+  private LocalDateTime creationDateTime;
+  private Boolean toRead;
 
   public long getId() {
     return id;
@@ -47,5 +50,21 @@ public class BookmarkDTO {
 
   public void setTags(List<String> tags) {
     this.tags = tags;
+  }
+
+  public LocalDateTime getCreationDateTime() {
+    return creationDateTime;
+  }
+
+  public void setCreationDateTime(LocalDateTime creationDateTime) {
+    this.creationDateTime = creationDateTime;
+  }
+
+  public Boolean getToRead() {
+    return toRead;
+  }
+
+  public void setToRead(Boolean toRead) {
+    this.toRead = toRead;
   }
 }
