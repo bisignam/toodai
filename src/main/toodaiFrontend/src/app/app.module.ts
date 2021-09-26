@@ -22,6 +22,7 @@ import {
   NgbCollapseModule,
   NgbDropdownModule,
   NgbNavModule,
+  NgbModalModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { ApiInterceptor } from './interceptors/api-interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -48,10 +49,11 @@ export function tokenGetter() {
     NgbNavModule,
     FontAwesomeModule,
     NgxPaginationModule,
+    NgbModalModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:8080'],
+        allowedDomains: ['localhost:8080'], //TODO parametrize
         disallowedRoutes: ['//localhost:8080/api/users/signin'], //We don't want to send the token when logging in
       },
     }),

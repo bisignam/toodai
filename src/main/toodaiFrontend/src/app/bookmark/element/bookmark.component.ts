@@ -1,9 +1,66 @@
 import { Bookmark } from './../bookmark';
 import { Component, Input } from '@angular/core';
+import { BookmarkService } from '../bookmark.service';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import {
   faTrashAlt as faTrashAlt,
   faEdit as faEdit,
 } from '@fortawesome/free-solid-svg-icons';
+
+@Component({
+  selector: 'ngbd-modal-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">Bookmark deletion</h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close button"
+        aria-describedby="modal-title"
+        (click)="activeModal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>
+        <strong
+          >Are you sure you want to delete bookmark
+          <span class="text-primary">{{ name }}</span
+          >?</strong
+        >
+      </p>
+      <p>
+        All information associated to this bookmark profile will be permanently
+        deleted.
+        <span class="text-danger">This operation can not be undone.</span>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        ngbAutofocus
+        class="btn btn-outline-secondary"
+        (click)="activeModal.dismiss(false)"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="activeModal.close(true)"
+      >
+        Ok
+      </button>
+    </div>
+  `,
+})
+export class NgbdModalContent {
+  @Input() name: String;
+
+  constructor(public activeModal: NgbActiveModal) {}
+}
 
 @Component({
   selector: 'tod-bookmark',
@@ -18,6 +75,11 @@ export class BookmarkComponent {
   private faviconSize = 200;
   @Input()
   public bookmark: Bookmark;
+
+  constructor(
+    private bookmarkService: BookmarkService,
+    public modalService: NgbModal
+  ) {}
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
@@ -37,5 +99,15 @@ export class BookmarkComponent {
       '&size=' +
       this.faviconSize
     );
+  }
+
+  public deleteBookmark() {
+    const modalRef = this.modalService.open(NgbdModalContent);
+    modalRef.componentInstance.name = this.bookmark.title;
+    modalRef.result.then((result: any) => {
+      if (result === true) {
+        this.bookmarkService.deleteBookmark(this.bookmark.id);
+      }
+    });
   }
 }

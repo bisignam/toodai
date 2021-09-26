@@ -37,7 +37,11 @@
       </div>
       <div class="offset-8 col-2">
         <div class="btn-group buttons">
-          <button type="button" class="btn btn-secondary btn-sm">
+          <button
+            type="button"
+            (click)="deleteBookmark()"
+            class="btn btn-secondary btn-sm"
+          >
             <fa-icon [icon]="faTrashAlt"></fa-icon>
           </button>
           <button type="button" class="btn btn-secondary btn-sm">
