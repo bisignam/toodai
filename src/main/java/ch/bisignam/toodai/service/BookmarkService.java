@@ -96,8 +96,8 @@ public class BookmarkService {
     bookmarkRepository.saveAll(bookmarks);
   }
 
-  public Page<BookmarkDTO> getBookmarks(User user, int page, int size) {
-    return bookmarkRepository.findByUser(user, Pageable.ofSize(size).withPage(page))
+  public Page<BookmarkDTO> getBookmarks(User user, int page, int pageSize) {
+    return bookmarkRepository.findByUser(user, Pageable.ofSize(pageSize).withPage(page))
         .map((bookmark) -> modelMapper.map(bookmark, BookmarkDTO.class));
   }
 

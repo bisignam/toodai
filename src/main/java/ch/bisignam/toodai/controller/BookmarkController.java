@@ -61,8 +61,8 @@ public class BookmarkController {
   @GetMapping(value = "/myBookmarks")
   @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
   public Page<BookmarkDTO> myBookmarks(@RequestParam(defaultValue = "0") int page,
-      @RequestParam(defaultValue = "3") int size, HttpServletRequest req) {
-    return bookmarkService.getBookmarks(userService.whoami(req), page, size);
+      @RequestParam(defaultValue = "20") int pageSize, HttpServletRequest req) {
+    return bookmarkService.getBookmarks(userService.whoami(req), page, pageSize);
   }
 
   @PostMapping(value = "/import")

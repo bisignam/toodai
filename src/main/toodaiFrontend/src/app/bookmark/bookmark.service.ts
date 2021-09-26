@@ -11,11 +11,13 @@ export class BookmarkService {
     return Promise.reject(error.message || error);
   }
   getBookmarks(page: number, pageSize: number): Promise<Bookmark[]> {
-    const params: HttpParams = new HttpParams();
-    params.set('page', page.toString());
-    params.set('pageSize', pageSize.toString());
+    const options = {
+      params: new HttpParams()
+        .set('page', page.toString())
+        .set('pageSize', pageSize.toString()),
+    };
     return this.http
-      .get(this.bookmarApiUrl, { params: params })
+      .get(this.bookmarApiUrl, options)
       .toPromise()
       .then((response: any) => {
         return response.content as Bookmark[];
