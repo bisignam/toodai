@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Bookmark } from './bookmark';
+import { BookmarksResponse } from './BookmarksResponse';
 
 @Injectable()
 export class BookmarkService {
@@ -10,7 +10,7 @@ export class BookmarkService {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
-  getBookmarks(page: number, pageSize: number): Promise<Bookmark[]> {
+  getBookmarks(page: number, pageSize: number): Promise<BookmarksResponse> {
     const options = {
       params: new HttpParams()
         .set('page', page.toString())
@@ -20,7 +20,7 @@ export class BookmarkService {
       .get(this.bookmarApiUrl, options)
       .toPromise()
       .then((response: any) => {
-        return response.content as Bookmark[];
+        return response as BookmarksResponse;
       })
       .catch(this.handleError);
   }

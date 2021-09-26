@@ -10,8 +10,11 @@ import { BookmarkService } from './bookmark.service';
 })
 export class BookmarksComponent implements OnInit {
   bookmarks: Bookmark[];
+  currentPage: number = 1;
+  itemsPerPage = 20;
+  totalItems: number;
   ngOnInit(): void {
-    this.getBookmarks(0, 20);
+    this.getBookmarks(this.currentPage, this.itemsPerPage);
   }
   constructor(
     private bookmarkService: BookmarkService,
@@ -21,8 +24,15 @@ export class BookmarksComponent implements OnInit {
     this.bookmarks = [];
   }
   getBookmarks(page: number, pageSize: number): void {
+    this.currentPage = page;
     this.bookmarkService
-      .getBookmarks(page, pageSize)
-      .then((bookmarks) => (this.bookmarks = bookmarks));
+      .getBookmarks(
+        page - 1 /*this is needed because ngx-pagination starts from 1 */,
+        pageSize
+      )
+      .then((response) => {
+        this.bookmarks = response.content as Bookmark[];
+        this.totalItems = response.totalElements;
+      });
   }
 }

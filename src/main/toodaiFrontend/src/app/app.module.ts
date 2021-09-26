@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/not-auth.guard';
 import { AuthService } from './auth/auth.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import {
   NgbCollapseModule,
@@ -46,6 +47,7 @@ export function tokenGetter() {
     NgbDropdownModule,
     NgbNavModule,
     FontAwesomeModule,
+    NgxPaginationModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
