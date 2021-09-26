@@ -13,6 +13,10 @@ export class BookmarksComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage = 20;
   totalItems: number;
+  public responsive: boolean = true;
+  public previousLabel: string = '';
+  public nextLabel: string = '';
+
   ngOnInit(): void {
     this.getBookmarks(this.currentPage, this.itemsPerPage);
   }
