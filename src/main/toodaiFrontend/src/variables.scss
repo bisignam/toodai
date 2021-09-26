@@ -1,0 +1,20 @@
+//base colors
+$brand-primary: #c9f2e6;
+$brand-success: #74bb74;
+$brand-info: #59aec8;
+$link-color: #2f6978;
+$headings-color: rgb(51, 51, 51);
+$btn-primary-color: $link-color;
+$breadcrumb-bg: white;
+
+//navbar
+$navbar-height: 30px;
+$navbar-border-radius: 0;
+$navbar-default-border: white;
+$navbar-default-color: white;
+$navbar-default-bg: lighten($brand-primary, 2%);
+$navbar-default-link-active-bg: white;
+$navbar-default-link-color: $link-color;
+
+//label
+$label-primary-bg: saturate(lighten($link-color, 30%), 10%);

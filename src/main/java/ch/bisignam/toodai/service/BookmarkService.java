@@ -72,7 +72,8 @@ public class BookmarkService {
       for (PinboardBookmarkImportDto importedBookmark : importedBookmarks) {
         BookmarkDTO bookmarkDTO = new BookmarkDTO();
         bookmarkDTO.setUrl(importedBookmark.getHref());
-        bookmarkDTO.setDescription(importedBookmark.getDescription());
+        bookmarkDTO.setTitle(importedBookmark.getDescription());
+        bookmarkDTO.setDescription(importedBookmark.getExtended());
         bookmarkDTO.setToRead(BooleanUtils.toBoolean(importedBookmark.getToread(), "yes", "no"));
         bookmarkDTO.setCreationDateTime(importedBookmark.getTime());
         bookmarkDTO.setTags(Arrays.asList(importedBookmark.getTags().split(" ")));

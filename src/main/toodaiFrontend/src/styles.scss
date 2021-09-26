@@ -1,0 +1,20 @@
+@import './variables.scss';
+
+/** Custom bootstrap buttons **/
+.btn-primary {
+  background: #c9f2e6;
+  color: #2f6978;
+  border: 0px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+  background-color: #2f6978;
+  color: #ffffff;
+  border: 0px;
+}
+
+@import '~bootstrap/scss/bootstrap.scss';

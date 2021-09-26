@@ -7,7 +7,7 @@ public class BookmarkDTO {
   private long id = -1;
   private String title;
   private String url;
-  private String description;
+  private String extended;
   private List<String> tags;
   private LocalDateTime creationDateTime;
   private Boolean toRead;
@@ -37,11 +37,11 @@ public class BookmarkDTO {
   }
 
   public String getDescription() {
-    return description;
+    return extended;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
+  public void setDescription(String extended) {
+    this.extended = extended;
   }
 
   public List<String> getTags() {

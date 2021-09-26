@@ -1,0 +1,50 @@
+<li class="list-group-item row bookmark">
+  <div class="col-xs-12 bookmark-info-container">
+    <div class="row">
+      <a class="bookmark-title" href="{{ bookmark.url }}" target="_blank">
+        {{ bookmark.title }}</a
+      >
+    </div>
+    <div class="row description-container">
+      <a
+        class="description-link"
+        (click)="isDescriptionCollapsed = !isDescriptionCollapsed"
+        >Show Description<span class="caret"></span>
+      </a>
+      <div class="row description-content">
+        <div
+          [(ngbCollapse)]="isDescriptionCollapsed"
+          class="card card-block card-header"
+        >
+          <div class="well well-xs description-well">
+            {{ bookmark.description }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row tags">
+      <div class="col-xs-12">
+        <ng-container *ngFor="let tag of bookmark.tags">
+          <span class="badge rounded-pill bg-primary tag">{{ tag }}</span>
+        </ng-container>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2 mt-3">
+        <span>
+          {{ bookmark.creationDateTime | date: 'MMMM y' }}
+        </span>
+      </div>
+      <div class="offset-8 col-2">
+        <div class="btn-group buttons">
+          <button type="button" class="btn btn-secondary btn-sm">
+            <fa-icon [icon]="faTrashAlt"></fa-icon>
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm">
+            <fa-icon [icon]="faEdit"></fa-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

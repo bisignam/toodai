@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Toodai  {
 
-
   public static void main(String[] args) {
     SpringApplication.run(Toodai.class, args);
   }

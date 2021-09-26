@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+      <ul ngbNav #nav="ngbNav" class="nav">
+        <li ngbNavItem class="d-flex justify-content-start">
+          <a class="navbar-brand" href="#">{{ title }}</a>
+        </li>
+        <li
+          ngbNavItem
+          *ngIf="!authService.loggedIn()"
+          routerLinkActive="active"
+        >
+          <a routerLink="/login"
+            ><span class="glyphicon glyphicon-log-in"></span> Login</a
+          >
+        </li>
+        <li
+          ngbNavItem
+          *ngIf="!authService.loggedIn()"
+          routerLinkActive="active"
+        >
+          <a routerLink="/registration"
+            ><span class="glyphicon glyphicon-user"></span> Sign Up</a
+          >
+        </li>
+        <li
+          ngbNavItem
+          *ngIf="authService.loggedIn()"
+          class="justify-content-end"
+          routerLinkActive="active"
+        >
+          <routerLink routerLink="/bookmarks">
+            <fa-icon [icon]="faHouse">Home</fa-icon>
+          </routerLink>
+        </li>
+        <!-- Start of dropdown-->
+        <li
+          ngbNavItem
+          *ngIf="authService.loggedIn()"
+          ngbDropdown
+          class="d-inline-block justify-content-end"
+        >
+          <button
+            id="user-actions-dropdown-button"
+            type="button"
+            class="btn btn-outline-primary"
+            id="userDropDownToggle"
+            ngbDropdownToggle
+          >
+            <fa-icon [icon]="faUser"></fa-icon>
+          </button>
+          <!-- end of dropdown-->
+        </li>
+      </ul>
+    </div>
+    <div class="row">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

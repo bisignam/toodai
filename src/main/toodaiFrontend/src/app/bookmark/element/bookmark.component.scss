@@ -1,0 +1,60 @@
+@import '../../../variables.scss';
+
+//base
+.bookmark {
+  border-top: none;
+  // border-bottom: 1px solid $link-color;
+  border-left: none;
+  border-right: none;
+}
+
+//title
+.bookmark a.bookmark-title {
+  font-size: 1rem;
+}
+
+.bookmark:hover a.bookmark-title {
+  color: saturate(lighten($link-color, 20%), 10%);
+  transition: 0.2s ease;
+}
+
+// collapsable description
+.description-link {
+  cursor: pointer;
+}
+
+.description-link span.caret {
+  margin-left: 5px;
+}
+
+.description-container {
+  margin-top: 10px;
+}
+
+.description-well {
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+// tags
+.bookmark .tags {
+  margin-top: 10px;
+}
+
+.bookmark .tag {
+  font-size: 0.9em;
+  margin-top: inherit;
+  display: inline;
+}
+
+// buttons
+div.buttons {
+  padding-top: 1em;
+  visibility: hidden;
+}
+
+.bookmark:hover div.buttons {
+  visibility: visible;
+  transition: 0.2s ease;
+}
