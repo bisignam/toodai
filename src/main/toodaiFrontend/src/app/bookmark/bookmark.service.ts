@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { BookmarksResponse } from './BookmarksResponse';
+import { Bookmark } from './bookmark';
 
 @Injectable()
 export class BookmarkService {
@@ -28,6 +29,15 @@ export class BookmarkService {
   deleteBookmark(id: number): Promise<Response> {
     return this.http
       .delete(this.baseBookmarksUrl + encodeURIComponent(id))
+      .toPromise()
+      .then((response: any) => {
+        return response;
+      })
+      .catch(this.handleError);
+  }
+  updateBookmark(bookmark: Bookmark): Promise<Response> {
+    return this.http
+      .put(this.baseBookmarksUrl, bookmark)
       .toPromise()
       .then((response: any) => {
         return response;

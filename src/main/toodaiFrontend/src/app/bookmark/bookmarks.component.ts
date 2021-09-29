@@ -39,4 +39,9 @@ export class BookmarksComponent implements OnInit {
         this.totalItems = response.totalElements;
       });
   }
+  public setEditModeFalseExceptFor(bookmarkId: number): void {
+    this.bookmarks
+      .filter((b) => b.id !== bookmarkId)
+      .map((b) => (b.editMode = false));
+  }
 }

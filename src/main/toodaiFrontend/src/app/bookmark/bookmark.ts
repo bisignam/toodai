@@ -6,4 +6,5 @@ export class Bookmark {
   tags: string[];
   creationDateTime: string;
   toRead: boolean;
+  editMode: boolean = false;
 }

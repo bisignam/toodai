@@ -1,12 +1,23 @@
 import { Bookmark } from './../bookmark';
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { BookmarkService } from '../bookmark.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import {
   faTrashAlt as faTrashAlt,
   faEdit as faEdit,
+  faSleigh,
 } from '@fortawesome/free-solid-svg-icons';
+import { UtilitiesService } from 'src/app/app.component';
 
 @Component({
   selector: 'ngbd-modal-content',
@@ -73,12 +84,19 @@ export class BookmarkComponent {
   public isDescriptionCollapsed = true;
   private faviconApiUrl = '/icon';
   private faviconSize = 200;
+  private editMode = false;
+  private wasInside = false;
   @Input()
   public bookmark: Bookmark;
+  @Output() editModeChange = new EventEmitter<boolean>();
+  @ViewChild('bookmarkDomElement', { read: ElementRef, static: false })
+  bookmarkDomElement: ElementRef;
 
   constructor(
+    private eRef: ElementRef,
     private bookmarkService: BookmarkService,
-    public modalService: NgbModal
+    public modalService: NgbModal,
+    private utilitiesService: UtilitiesService
   ) {}
 
   private handleError(error: any): Promise<any> {
@@ -109,5 +127,33 @@ export class BookmarkComponent {
         this.bookmarkService.deleteBookmark(this.bookmark.id);
       }
     });
+  }
+
+  public updateBookmark() {
+    this.bookmarkService.updateBookmark(this.bookmark);
+  }
+
+  public setEditMode(editMode: boolean): void {
+    this.bookmark.editMode = editMode;
+    if (editMode === true) {
+      /*this.utilitiesService.documentClickedTarget.subscribe((target: any) =>
+        this.documentClickListener(target)
+      );*/
+    } else {
+      //  this.utilitiesService.documentClickedTarget.unsubscribe();
+    }
+    this.editModeChange.emit(this.bookmark.editMode);
+  }
+
+  public getEditMode(): boolean {
+    return this.bookmark.editMode;
+  }
+
+  documentClickListener(target: any): void {
+    if (this.bookmarkDomElement.nativeElement.contains(target)) {
+      //  this.setEditMode(true);
+    } else {
+      //this.setEditMode(false);
+    }
   }
 }

@@ -112,6 +112,7 @@ public class BookmarkService {
         .getUsername()
         .equals(securityUtils.getCurrentPrincipal())) {
       Bookmark updatedBookmark = modelMapper.map(bookmarkDTO, Bookmark.class);
+      updatedBookmark.setUser(bookmark.get().getUser());
       bookmarkRepository.save(updatedBookmark);
     } else {
       throw new IllegalStateException(
