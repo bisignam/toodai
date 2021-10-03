@@ -23,3 +23,7 @@ a.dropdown-item {
 .navbar .navbar-nav > li.open > a:focus {
   background-color: $brand-primary;
 }
+
+.example-spacer {
+  flex: 1 auto;
+}

@@ -49,21 +49,12 @@
         >
       </div>
       <div class="row description-container">
-        <a
-          class="description-link"
-          (click)="isDescriptionCollapsed = !isDescriptionCollapsed"
-          >Show Description<span class="caret"></span>
-        </a>
-        <div class="row description-content">
-          <div
-            [(ngbCollapse)]="isDescriptionCollapsed"
-            class="card card-block card-header"
-          >
-            <div class="well well-xs description-well">
-              {{ bookmark.description }}
-            </div>
-          </div>
-        </div>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Show description</mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>{{ bookmark.description }}</p>
+        </mat-expansion-panel>
       </div>
       <div class="row tags">
         <div class="col-xs-12">

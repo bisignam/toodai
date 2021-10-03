@@ -18,14 +18,15 @@ import { NotAuthGuard } from './guards/not-auth.guard';
 import { AuthService } from './auth/auth.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-import {
-  NgbCollapseModule,
-  NgbDropdownModule,
-  NgbNavModule,
-  NgbModalModule,
-} from '@ng-bootstrap/ng-bootstrap';
 import { ApiInterceptor } from './interceptors/api-interceptor';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { DeleteBookmarkDialogComponent } from './bookmark/delete-bookmark-dialog/delete-bookmark-dialog.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -37,6 +38,7 @@ export function tokenGetter() {
     BookmarkComponent,
     BookmarksComponent,
     LoginComponent,
+    DeleteBookmarkDialogComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -44,12 +46,13 @@ export function tokenGetter() {
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbCollapseModule,
-    NgbDropdownModule,
-    NgbNavModule,
     FontAwesomeModule,
     NgxPaginationModule,
-    NgbModalModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -57,7 +60,9 @@ export function tokenGetter() {
         disallowedRoutes: ['//localhost:8080/api/users/signin'], //We don't want to send the token when logging in
       },
     }),
+    BrowserAnimationsModule,
   ],
+  entryComponents: [DeleteBookmarkDialogComponent],
   providers: [
     BookmarkService,
     AuthGuard,

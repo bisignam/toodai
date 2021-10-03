@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12">
+      <!--
       <ul ngbNav #nav="ngbNav" class="nav">
         <li ngbNavItem class="d-flex justify-content-start">
           <a class="navbar-brand" href="#">{{ title }}</a>
@@ -33,7 +34,6 @@
             <fa-icon [icon]="faHouse">Home</fa-icon>
           </routerLink>
         </li>
-        <!-- Start of dropdown-->
         <li
           ngbNavItem
           *ngIf="authService.loggedIn()"
@@ -49,9 +49,38 @@
           >
             <fa-icon [icon]="faUser"></fa-icon>
           </button>
-          <!-- end of dropdown-->
         </li>
       </ul>
+      -->
+      <mat-toolbar>
+        <span>TOODAi</span>
+        <span class="example-spacer"></span>
+        <button
+          *ngIf="!authService.loggedIn()"
+          mat-icon-button
+          class="example-icon favorite-icon"
+          aria-label="login icon"
+          routerLink="/login"
+        >
+          <mat-icon>login</mat-icon>
+        </button>
+        <button
+          *ngIf="authService.loggedIn()"
+          mat-icon-button
+          class="example-icon favorite-icon"
+          aria-label="login icon"
+        >
+          <mat-icon>logout</mat-icon>
+        </button>
+        <button
+          *ngIf="!authService.loggedIn()"
+          mat-icon-button
+          class="example-icon favorite-icon"
+          aria-label="Example icon-button with heart icon"
+        >
+          Sign up
+        </button>
+      </mat-toolbar>
     </div>
     <div class="row">
       <router-outlet></router-outlet>
