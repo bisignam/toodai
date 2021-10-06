@@ -1,29 +1,14 @@
 @import '../styles.scss';
 
-#user-actions-dropdown-button span.caret {
-  margin-left: 10px;
+.toodaiNavbar {
+  display: flex;
 }
-
-#user-actions-dropdown-button:focus {
-  color: $link-color;
+.login-button {
+  margin-left: auto;
 }
-
-#user-actions-dropdown-button:hover {
-  color: $link-color;
+.addurl-button {
+  margin-left: auto;
 }
-
-a.dropdown-toggle {
-  cursor: pointer;
-}
-
-a.dropdown-item {
-  cursor: pointer;
-}
-
-.navbar .navbar-nav > li.open > a:focus {
-  background-color: $brand-primary;
-}
-
-.example-spacer {
-  flex: 1 auto;
+.logout-button {
+  margin-left: auto;
 }

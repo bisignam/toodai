@@ -1,0 +1,64 @@
+<div class="row">
+  <form class="col" [formGroup]="options">
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="fill">
+          <mat-label>Url</mat-label>
+          <input matInput required />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput required />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="tags" appearance="fill">
+          <mat-label>Tags</mat-label>
+          <mat-chip-list #chipList aria-label="Tags selection">
+            <mat-chip
+              *ngFor="let tag of tags"
+              [selectable]="true"
+              [removable]="true"
+              (removed)="removeTag(tag)"
+            >
+              {{ tag }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input
+              placeholder="New tag..."
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="true"
+              (matChipInputTokenEnd)="addTag($event)"
+            />
+          </mat-chip-list>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-checkbox [formControl]="toRead">To read</mat-checkbox>
+      </div>
+    </div>
+  </form>
+</div>

@@ -52,31 +52,36 @@
         </li>
       </ul>
       -->
-      <mat-toolbar>
+      <mat-toolbar class="toodaiNavbar">
         <span>TOODAi</span>
-        <span class="example-spacer"></span>
         <button
           *ngIf="!authService.loggedIn()"
-          mat-icon-button
-          class="example-icon favorite-icon"
-          aria-label="login icon"
+          class="login-button"
+          aria-label="login button"
           routerLink="/login"
         >
-          <mat-icon>login</mat-icon>
+          Login
         </button>
         <button
           *ngIf="authService.loggedIn()"
-          mat-icon-button
-          class="example-icon favorite-icon"
-          aria-label="login icon"
+          class="addurl-button"
+          aria-label="add url button"
+          (click)="addBookmark()"
         >
-          <mat-icon>logout</mat-icon>
+          New url
+        </button>
+        <button
+          mat-icon-button
+          *ngIf="authService.loggedIn()"
+          class="logout-button"
+          aria-label="logout icon"
+        >
+          <mat-icon (click)="authService.logout()">logout</mat-icon>
         </button>
         <button
           *ngIf="!authService.loggedIn()"
-          mat-icon-button
-          class="example-icon favorite-icon"
-          aria-label="Example icon-button with heart icon"
+          class="signup-button"
+          aria-label="singup button"
         >
           Sign up
         </button>

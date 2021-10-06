@@ -6,6 +6,8 @@ import {
   faSignOutAlt as faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
 import { Subject } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { AddBookmarkDialogComponent } from './bookmark/add-bookmark-dialog/add-bookmark-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -18,12 +20,22 @@ export class AppComponent {
   faUser = faUser;
   constructor(
     public authService: AuthService,
-    private utilitiesService: UtilitiesService
+    private utilitiesService: UtilitiesService,
+    public dialog: MatDialog
   ) {}
 
   @HostListener('document:click', ['$event'])
   documentClick(event: any): void {
     this.utilitiesService.documentClickedTarget.next(event.target);
+  }
+
+  public addBookmark() {
+    const modalRef = this.dialog.open(AddBookmarkDialogComponent);
+    modalRef.afterClosed().subscribe((result: any) => {
+      if (result === true) {
+        //TODO create bookmark
+      }
+    });
   }
 }
 

@@ -8,7 +8,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { BookmarkComponent } from './bookmark/element/bookmark.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BookmarksComponent } from './bookmark/bookmarks.component';
 import { BookmarkService } from './bookmark/bookmark.service';
@@ -26,7 +26,15 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
+
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 import { DeleteBookmarkDialogComponent } from './bookmark/delete-bookmark-dialog/delete-bookmark-dialog.component';
+import { AddBookmarkDialogComponent } from './bookmark/add-bookmark-dialog/add-bookmark-dialog.component';
+import { AddBookmarkFormComponent } from './bookmark/add-bookmark-form/add-bookmark-form.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -39,6 +47,8 @@ export function tokenGetter() {
     BookmarksComponent,
     LoginComponent,
     DeleteBookmarkDialogComponent,
+    AddBookmarkFormComponent,
+    AddBookmarkDialogComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -46,6 +56,7 @@ export function tokenGetter() {
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
     NgxPaginationModule,
     MatDialogModule,
@@ -53,6 +64,10 @@ export function tokenGetter() {
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatChipsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -62,7 +77,7 @@ export function tokenGetter() {
     }),
     BrowserAnimationsModule,
   ],
-  entryComponents: [DeleteBookmarkDialogComponent],
+  entryComponents: [DeleteBookmarkDialogComponent, AddBookmarkDialogComponent],
   providers: [
     BookmarkService,
     AuthGuard,

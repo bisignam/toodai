@@ -1,0 +1,14 @@
+<div class="addBookmarkDialog row">
+  <div class="col">
+    <h2 mat-dialog-title>New Bookmark!</h2>
+    <mat-dialog-content class="mat-typography">
+      <add-bookmark-form></add-bookmark-form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel action</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
+        Create
+      </button>
+    </mat-dialog-actions>
+  </div>
+</div>
