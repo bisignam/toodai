@@ -1,5 +1,7 @@
 package ch.bisignam.toodai.service;
 
+import static org.springframework.data.domain.Sort.Direction.DESC;
+
 import ch.bisignam.toodai.dto.BookmarkDTO;
 import ch.bisignam.toodai.dto.PinboardBookmarkImportDto;
 import ch.bisignam.toodai.model.Bookmark;
@@ -7,7 +9,6 @@ import ch.bisignam.toodai.model.User;
 import ch.bisignam.toodai.repository.BookmarkRepository;
 import ch.bisignam.toodai.security.SecurityUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.primitives.Booleans;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -18,14 +19,21 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.BooleanUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BookmarkService {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(BookmarkService.class);
 
   private final BookmarkRepository bookmarkRepository;
 
@@ -48,6 +56,14 @@ public class BookmarkService {
   public void create(User user, BookmarkDTO bookmarkDTO) {
     Bookmark bookmark = modelMapper.map(bookmarkDTO, Bookmark.class);
     bookmark.setUser(user);
+    Document urlDocument = null;
+    try {
+      urlDocument = Jsoup.connect(bookmarkDTO.getUrl()).get();
+    } catch (IOException e) {
+      LOGGER.debug("Error retrieving title of website " + bookmarkDTO.getUrl()
+          + ", using url as title instead", e);
+    }
+    bookmark.setTitle(urlDocument != null ? urlDocument.title() : bookmarkDTO.getUrl());
     bookmarkRepository.save(bookmark);
   }
 
@@ -77,7 +93,7 @@ public class BookmarkService {
         bookmarkDTO.setDescription(importedBookmark.getExtended());
         bookmarkDTO.setToRead(BooleanUtils.toBoolean(importedBookmark.getToread(), "yes", "no"));
         bookmarkDTO.setCreationDateTime(importedBookmark.getTime());
-        if(!importedBookmark.getTags().isEmpty()) {
+        if (!importedBookmark.getTags().isEmpty()) {
           bookmarkDTO.setTags(Arrays.asList(importedBookmark.getTags().split(" ")));
         } else {
           bookmarkDTO.setTags(Collections.emptyList());
@@ -97,7 +113,8 @@ public class BookmarkService {
   }
 
   public Page<BookmarkDTO> getBookmarks(User user, int page, int pageSize) {
-    return bookmarkRepository.findByUser(user, Pageable.ofSize(pageSize).withPage(page))
+    return bookmarkRepository.findByUser(user, PageRequest.of(page, pageSize,
+        Sort.by(DESC, "creationDateTime")))
         .map((bookmark) -> modelMapper.map(bookmark, BookmarkDTO.class));
   }
 

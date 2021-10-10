@@ -8,6 +8,8 @@ import {
 import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AddBookmarkDialogComponent } from './bookmark/add-bookmark-dialog/add-bookmark-dialog.component';
+import { BookmarkService } from './bookmark/bookmark.service';
+import { Bookmark } from './bookmark/bookmark';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +23,8 @@ export class AppComponent {
   constructor(
     public authService: AuthService,
     private utilitiesService: UtilitiesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public bookmarkService: BookmarkService
   ) {}
 
   @HostListener('document:click', ['$event'])
@@ -32,8 +35,9 @@ export class AppComponent {
   public addBookmark() {
     const modalRef = this.dialog.open(AddBookmarkDialogComponent);
     modalRef.afterClosed().subscribe((result: any) => {
-      if (result === true) {
-        //TODO create bookmark
+      if (result instanceof Bookmark) {
+        let bookmark = result as Bookmark;
+        this.bookmarkService.createBookmark(bookmark);
       }
     });
   }

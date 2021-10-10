@@ -44,4 +44,13 @@ export class BookmarkService {
       })
       .catch(this.handleError);
   }
+  createBookmark(bookmark: Bookmark): Promise<Response> {
+    return this.http
+      .post(this.baseBookmarksUrl, bookmark)
+      .toPromise()
+      .then((response: any) => {
+        return response;
+      })
+      .catch(this.handleError);
+  }
 }

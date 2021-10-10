@@ -5,6 +5,7 @@ import ch.bisignam.toodai.service.BookmarkService;
 import ch.bisignam.toodai.service.UserService;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,7 +41,7 @@ public class BookmarkController {
 
   @PostMapping
   @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_CLIENT')")
-  public void create(@RequestBody BookmarkDTO bookmarkDTO, HttpServletRequest req) {
+  public void create(@Valid @RequestBody BookmarkDTO bookmarkDTO, HttpServletRequest req) {
     bookmarkService
         .create(userService.whoami(req), bookmarkDTO);
   }

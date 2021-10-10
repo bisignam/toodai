@@ -2,14 +2,23 @@ package ch.bisignam.toodai.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.URL;
 
 public class BookmarkDTO {
   private long id = -1;
   private String title;
+  @NotEmpty
+  @URL
   private String url;
-  private String extended;
+  @Length(max = 5000)
+  private String description;
   private List<String> tags;
+  @NotNull
   private LocalDateTime creationDateTime;
+  @NotNull
   private Boolean toRead;
 
   public long getId() {
@@ -37,11 +46,11 @@ public class BookmarkDTO {
   }
 
   public String getDescription() {
-    return extended;
+    return description;
   }
 
   public void setDescription(String extended) {
-    this.extended = extended;
+    this.description = extended;
   }
 
   public List<String> getTags() {

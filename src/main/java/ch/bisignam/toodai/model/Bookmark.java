@@ -17,7 +17,7 @@ public class Bookmark {
   private Long id;
   private String title;
   private String url;
-  private String extended;
+  private String description;
   private List<String> tags;
   private Boolean toRead;
   private LocalDateTime creationDateTime;
@@ -48,12 +48,12 @@ public class Bookmark {
     this.url = url;
   }
 
-  public String getExtended() {
-    return extended;
+  public String getDescription() {
+    return description;
   }
 
-  public void setExtended(String extended) {
-    this.extended = extended;
+  public void setDescription(String extended) {
+    this.description = extended;
   }
 
   public List<String> getTags() {

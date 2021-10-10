@@ -11,8 +11,4 @@ export class DeleteBookmarkDialogComponent {
     public dialogRef: MatDialogRef<DeleteBookmarkDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { name: string }
   ) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
 }
