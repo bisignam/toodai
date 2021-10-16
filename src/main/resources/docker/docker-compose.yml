@@ -1,26 +1,78 @@
-version: '3.1'
+version: '3.7'
 
 services:
 
   mongo:
-    image: mongo
+    build:
+      dockerfile: Dockerfile
+      context: ./mongo
     restart: always
     ports:
-      - 27017:27017 #this is the default port
+      - 27017:27017
+    healthcheck:
+      #Trick to configure the replica set after the image has booted, add --quiet for debugging
+      test: test $$(echo "rs.initiate({_id:'toodaiReplicaSet',members:[{_id:0,host:\"mongo:27017\"}]}).ok || rs.status().ok" | mongo -u root -p root) -eq 1
+      interval: 10s
+      start_period: 30s
     volumes:
-      - '~/.toodai/data:/data/db' #the first part before : is the host directory where you want to store mongodb data
+      - mongo:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+    command: --replSet toodaiReplicaSet --keyFile /opt/mongo-keyfile
 
-  toodai:
-    build:
-      context: ../../../../
-      dockerfile: src/main/resources/docker/backend/Dockerfile
-    restart: always
-    depends_on:
-      - mongo
-    ports:
-      - 8080:8080
+    networks:
+      - toodai
+
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2-amd64
     environment:
-      SPRING_DATA_MONGODB_URI: "mongodb://root:root@mongo:27017/toodai?authSource=admin"
+      - node.name=es01
+      - cluster.name=es-docker-cluster
+     # - discovery.seed_hosts=es02,es03 //for the moment we don't need a cluster
+      - cluster.initial_master_nodes=es01
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elastic:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - toodai
+
+  kib01:
+    image: docker.elastic.co/kibana/kibana-oss:7.10.2
+    container_name: kib01
+    ports:
+      - 5601:5601
+    environment:
+      ELASTICSEARCH_URL: http://es01:9200
+      ELASTICSEARCH_HOSTS: '["http://es01:9200"]'
+    networks:
+      - toodai
+
+  monstache:
+    image: rwynn/monstache:latest
+    working_dir: /monstache
+    command: -f ./config.toml
+    volumes:
+      - ./monstache:/monstache/
+    ports:
+      - "8081:8080"
+    restart: always
+    networks:
+      - toodai
+
+volumes:
+  mongo:
+    driver: local
+  elastic:
+    driver: local
+
+networks:
+  toodai:
+    driver: bridge

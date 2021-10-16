@@ -1,1 +1,0 @@
-http -f POST http://localhost:8080/login username='mario' password='password' 

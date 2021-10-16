@@ -10,10 +10,21 @@ spring:
       max-request-size: 11MB
   data:
     mongodb:
-      uri: "mongodb://root:root@localhost:27017/toodai?authSource=admin"
+      host: localhost
+      port: 27017
+      database: toodai
+      authentication-database: toodai
+      username: toodai
+      password: toodai
+      replica-set-name: toodaiReplicaSet
 server:
    port: 8080
-
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb: DEBUG
 security:
   jwt:
     token:
