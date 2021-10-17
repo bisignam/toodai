@@ -17,6 +17,11 @@ spring:
       username: toodai
       password: toodai
       replica-set-name: toodaiReplicaSet
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200
+      username: elastic
+      password: password
 server:
    port: 8080
 logging:

@@ -11,8 +11,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import ch.bisignam.toodai.model.User;
-import ch.bisignam.toodai.repository.UserRepository;
+import ch.bisignam.toodai.model.mongo.User;
+import ch.bisignam.toodai.repository.mongo.UserRepository;
 import ch.bisignam.toodai.security.JwtTokenProvider;
 
 @Service

@@ -1,4 +1,4 @@
-package ch.bisignam.toodai.model;
+package ch.bisignam.toodai.model.mongo;
 
 import java.util.List;
 import org.springframework.data.annotation.Id;

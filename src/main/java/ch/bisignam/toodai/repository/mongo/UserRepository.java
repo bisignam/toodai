@@ -1,7 +1,7 @@
-package ch.bisignam.toodai.repository;
+package ch.bisignam.toodai.repository.mongo;
 
 
-import ch.bisignam.toodai.model.User;
+import ch.bisignam.toodai.model.mongo.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface UserRepository extends MongoRepository<User, Integer > {

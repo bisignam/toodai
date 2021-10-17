@@ -1,7 +1,7 @@
 package ch.bisignam.toodai.security;
 
 import ch.bisignam.toodai.exception.CustomException;
-import ch.bisignam.toodai.model.Role;
+import ch.bisignam.toodai.model.mongo.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

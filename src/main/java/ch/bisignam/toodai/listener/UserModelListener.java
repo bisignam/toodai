@@ -1,6 +1,6 @@
 package ch.bisignam.toodai.listener;
 
-import ch.bisignam.toodai.model.User;
+import ch.bisignam.toodai.model.mongo.User;
 import ch.bisignam.toodai.service.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.event.AbstractMongoEventListener;

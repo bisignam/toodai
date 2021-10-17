@@ -4,9 +4,9 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 
 import ch.bisignam.toodai.dto.BookmarkDTO;
 import ch.bisignam.toodai.dto.PinboardBookmarkImportDto;
-import ch.bisignam.toodai.model.Bookmark;
-import ch.bisignam.toodai.model.User;
-import ch.bisignam.toodai.repository.BookmarkRepository;
+import ch.bisignam.toodai.model.mongo.Bookmark;
+import ch.bisignam.toodai.model.mongo.User;
+import ch.bisignam.toodai.repository.mongo.BookmarkRepository;
 import ch.bisignam.toodai.security.SecurityUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;

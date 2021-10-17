@@ -2,7 +2,7 @@ package ch.bisignam.toodai.dto;
 
 import java.util.List;
 
-import ch.bisignam.toodai.model.Role;
+import ch.bisignam.toodai.model.mongo.Role;
 
 public class UserResponseDTO {
 

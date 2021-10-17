@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import ch.bisignam.toodai.model.User;
-import ch.bisignam.toodai.repository.UserRepository;
+import ch.bisignam.toodai.model.mongo.User;
+import ch.bisignam.toodai.repository.mongo.UserRepository;
 
 @Service
 public class ToodaiUserDetails implements UserDetailsService {
