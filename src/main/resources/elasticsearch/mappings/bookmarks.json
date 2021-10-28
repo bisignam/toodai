@@ -1,0 +1,43 @@
+{
+  "properties": {
+    "_class": {
+      "type": "text",
+      "analyzer": "bookmarks_analyzer"
+    },
+    "creationDateTime": {
+      "type": "date"
+    },
+    "description": {
+      "type": "text",
+      "analyzer": "bookmarks_analyzer"
+    },
+    "tags": {
+      "type": "text"
+    },
+    "title": {
+      "type": "text",
+      "analyzer": "bookmarks_analyzer"
+    },
+    "toRead": {
+      "type": "boolean"
+    },
+    "url": {
+      "type": "keyword"
+    },
+    "user": {
+      "properties": {
+        "$id": {
+          "type": "long"
+        },
+        "$ref": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword"
+            }
+          }
+        }
+      }
+    }
+  }
+}
