@@ -1,5 +1,7 @@
 package ch.bisignam.toodai.model.elastic;
 
+import static ch.bisignam.toodai.common.Constants.BOOKMARKS_INDEX;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.annotation.Id;
@@ -7,7 +9,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Document(indexName="bookmarks", createIndex = false)
+@Document(indexName=BOOKMARKS_INDEX, createIndex = false)
 public class Bookmark {
 
   @Id

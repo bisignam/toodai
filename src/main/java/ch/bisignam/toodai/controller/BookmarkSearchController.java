@@ -1,5 +1,6 @@
 package ch.bisignam.toodai.controller;
 
+import ch.bisignam.toodai.dto.BookmarkDTO;
 import ch.bisignam.toodai.service.BookmarksSearchService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,4 +26,9 @@ public class BookmarkSearchController {
     return bookmarksSearchService.fetchTagSuggestions(tag);
   }
 
+  @GetMapping("/bookmarks")
+  public List<BookmarkDTO> searchBookmarks(@RequestParam List<String> tags,
+      @RequestParam String search) {
+    return bookmarksSearchService.searchBookmarks(tags, search);
+  }
 }
