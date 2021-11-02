@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class IndicesCurator {
+public class IndicesCuratorStartupListener {
 
   public static final String ELASTICSEARCH_SETTINGS_BOOKMARKS_JSON = "elasticsearch/settings/bookmarks.json";
   public static final String ELASTICSEARCH_MAPPINGS_BOOKMARKS_JSON = "elasticsearch/mappings/bookmarks.json";
@@ -39,7 +39,7 @@ public class IndicesCurator {
   private final ElasticsearchOperations elasticsearchOperations;
   private final RestHighLevelClient restHighLevelClient;
 
-  public IndicesCurator(
+  public IndicesCuratorStartupListener(
       ElasticsearchOperations elasticsearchOperations,
       RestHighLevelClient restHighLevelClient) {
     this.elasticsearchOperations = elasticsearchOperations;
@@ -66,6 +66,7 @@ public class IndicesCurator {
         log.info("Create index and swap the index alias {} currently points to", BOOKMARKS_INDEX);
         Pair<String, String> oldAndNewIndexName = createIndexAndAlias(settings, mapping);
         reindex(oldAndNewIndexName.getLeft(), oldAndNewIndexName.getRight());
+        log.info("Removing old index {}", oldAndNewIndexName.getLeft());
         elasticsearchOperations
             .indexOps(IndexCoordinates.of(oldAndNewIndexName.getLeft())).delete();
       } else {
