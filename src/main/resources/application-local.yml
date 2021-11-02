@@ -22,8 +22,12 @@ spring:
       uris: http://localhost:9200
       username: elastic
       password: password
+# Elastic search rest client trace logging, it logs all requests in curl format, enable only in dire situations
+#logging:
+#  level:
+#    tracer: TRACE
 server:
-   port: 8080
+  port: 8080
 security:
   jwt:
     token:
