@@ -33,6 +33,13 @@ public class Bookmark {
   @Field(type = FieldType.Date, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
   private LocalDateTime creationDateTime;
 
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
 
   public String getTitle() {
     return title;
