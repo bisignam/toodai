@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class IndexesStartupListener {
+public class IndicesCurator {
 
   public static final String ELASTICSEARCH_SETTINGS_BOOKMARKS_JSON = "elasticsearch/settings/bookmarks.json";
   public static final String ELASTICSEARCH_MAPPINGS_BOOKMARKS_JSON = "elasticsearch/mappings/bookmarks.json";
@@ -39,7 +39,7 @@ public class IndexesStartupListener {
   private final ElasticsearchOperations elasticsearchOperations;
   private final RestHighLevelClient restHighLevelClient;
 
-  public IndexesStartupListener(
+  public IndicesCurator(
       ElasticsearchOperations elasticsearchOperations,
       RestHighLevelClient restHighLevelClient) {
     this.elasticsearchOperations = elasticsearchOperations;
