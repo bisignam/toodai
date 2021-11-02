@@ -57,7 +57,7 @@ public class BookmarksSearchService {
   public List<String> fetchTagSuggestions(String tag) {
     TermsAggregationBuilder aggregationBuilder = new TermsAggregationBuilder(TAGS_AGGREGATION_NAME);
     aggregationBuilder.includeExclude(new IncludeExclude(new RegExp(tag + ".*"), new RegExp("#")));
-    aggregationBuilder.field("tags.keyword");
+    aggregationBuilder.field("tags");
     aggregationBuilder.size(10);
     Query searchQuery = new NativeSearchQueryBuilder().addAggregation(aggregationBuilder)
         .build();

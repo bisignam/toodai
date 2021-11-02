@@ -12,7 +12,7 @@
       "analyzer": "bookmarks_analyzer"
     },
     "tags": {
-      "type": "text"
+      "type": "keyword"
     },
     "title": {
       "type": "text",
