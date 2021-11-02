@@ -6,7 +6,6 @@ import ch.bisignam.toodai.dto.BookmarkDTO;
 import ch.bisignam.toodai.model.elastic.Bookmark;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.apache.lucene.util.automaton.RegExp;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -18,7 +17,10 @@ import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.SearchHitSupport;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
@@ -40,18 +42,18 @@ public class BookmarksSearchService {
     this.modelMapper = modelMapper;
   }
 
-  public List<BookmarkDTO> searchBookmarks(List<String> tags, String text) {
+  public Page<BookmarkDTO> searchBookmarks(List<String> tags, String text, int page, int pageSize) {
     MultiMatchQueryBuilder matchQueryBuilder = QueryBuilders
         .multiMatchQuery(text, "title", "description");
     TermsQueryBuilder termsQueryBuilder = QueryBuilders.termsQuery("tags", tags);
-    Query query = new NativeSearchQueryBuilder()
+    Query query = new NativeSearchQueryBuilder().withPageable(
+            Pageable.ofSize(pageSize).withPage(page))
         .withQuery(QueryBuilders.boolQuery().must(matchQueryBuilder).must(termsQueryBuilder))
         .build();
     SearchHits<Bookmark> searchHits = elasticsearchOperations
         .search(query, Bookmark.class, IndexCoordinates.of(BOOKMARKS_INDEX));
-    return searchHits.get().map(
-        bookmarkSearchHit -> modelMapper.map(bookmarkSearchHit.getContent(), BookmarkDTO.class))
-        .collect(Collectors.toList());
+    return SearchHitSupport.searchPageFor(searchHits, query.getPageable()).map(
+        bookmarkSearchHit -> modelMapper.map(bookmarkSearchHit.getContent(), BookmarkDTO.class));
   }
 
   public List<String> fetchTagSuggestions(String tag) {

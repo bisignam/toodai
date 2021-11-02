@@ -4,6 +4,7 @@ import ch.bisignam.toodai.dto.BookmarkDTO;
 import ch.bisignam.toodai.service.BookmarksSearchService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,8 +28,9 @@ public class BookmarkSearchController {
   }
 
   @GetMapping("/bookmarks")
-  public List<BookmarkDTO> searchBookmarks(@RequestParam List<String> tags,
-      @RequestParam String search) {
-    return bookmarksSearchService.searchBookmarks(tags, search);
+  public Page<BookmarkDTO> searchBookmarks(@RequestParam List<String> tags,
+      @RequestParam String search, @RequestParam(defaultValue = "0") int page,
+      @RequestParam(defaultValue = "20") int pageSize) {
+    return bookmarksSearchService.searchBookmarks(tags, search, page, pageSize);
   }
 }
