@@ -24,12 +24,6 @@ spring:
       password: password
 server:
    port: 8080
-logging:
-  level:
-    org:
-      springframework:
-        data:
-          mongodb: DEBUG
 security:
   jwt:
     token:
