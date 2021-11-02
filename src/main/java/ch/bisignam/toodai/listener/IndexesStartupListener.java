@@ -66,6 +66,8 @@ public class IndexesStartupListener {
         log.info("Create index and swap the index alias {} currently points to", BOOKMARKS_INDEX);
         Pair<String, String> oldAndNewIndexName = createIndexAndAlias(settings, mapping);
         reindex(oldAndNewIndexName.getLeft(), oldAndNewIndexName.getRight());
+        elasticsearchOperations
+            .indexOps(IndexCoordinates.of(oldAndNewIndexName.getLeft())).delete();
       } else {
         log.info("Index {} configuration has not changed, nothing to do", BOOKMARKS_INDEX);
       }
