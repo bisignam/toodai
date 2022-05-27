@@ -29,12 +29,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
-
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { DeleteBookmarkDialogComponent } from './bookmark/delete-bookmark-dialog/delete-bookmark-dialog.component';
 import { AddBookmarkDialogComponent } from './bookmark/add-bookmark-dialog/add-bookmark-dialog.component';
 import { AddBookmarkFormComponent } from './bookmark/add-bookmark-form/add-bookmark-form.component';
+import { SearchTextInputComponent } from './search-text-input/search-text-input.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -49,6 +53,7 @@ export function tokenGetter() {
     DeleteBookmarkDialogComponent,
     AddBookmarkFormComponent,
     AddBookmarkDialogComponent,
+    SearchTextInputComponent
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -68,10 +73,13 @@ export function tokenGetter() {
     MatInputModule,
     MatCheckboxModule,
     MatChipsModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    FlexLayoutModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:8080'], //TODO parametrize
+        allowedDomains: ['localhost:8080'],
         disallowedRoutes: ['//localhost:8080/api/users/signin'], //We don't want to send the token when logging in
       },
     }),
@@ -86,4 +94,4 @@ export function tokenGetter() {
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
   ],
 })
-export class AppModule {}
+export class AppModule { }

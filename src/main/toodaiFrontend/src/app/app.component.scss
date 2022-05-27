@@ -1,14 +1,9 @@
 @import '../styles.scss';
 
-.toodaiNavbar {
-  display: flex;
+.row-height {
+  height: 100%;
 }
-.login-button {
-  margin-left: auto;
-}
+
 .addurl-button {
-  margin-left: auto;
-}
-.logout-button {
-  margin-left: auto;
+  margin-left: 20px;
 }

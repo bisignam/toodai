@@ -9,14 +9,14 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
   jwthelper = new JwtHelperService();
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient) { }
 
   login(username: string, password: string) {
     const headers = new Headers({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
     return this.http
-      .post('/api/users/signin', headers, {
+      .post('/users/signin', headers, {
         params: new HttpParams({
           fromObject: { username: username, password: password },
         }),

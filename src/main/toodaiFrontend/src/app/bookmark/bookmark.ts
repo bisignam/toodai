@@ -1,3 +1,5 @@
+import { Highlights as Highlights } from "./highlight";
+
 export class Bookmark {
   id: number;
   title: string;
@@ -7,4 +9,7 @@ export class Bookmark {
   creationDateTime: string;
   toRead: boolean;
   editMode: boolean = false;
+  highlights: Highlights;
 }
+
+

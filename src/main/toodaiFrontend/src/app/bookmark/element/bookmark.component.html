@@ -2,41 +2,21 @@
   <div #bookmarkDomElement class="col-xs-12 bookmark-info-container">
     <div *ngIf="getEditMode(); else viewModeBlock">
       <div class="row">
-        <input
-          [(ngModel)]="bookmark.url"
-          name="url"
-          class="input-bookmark-url"
-        />
-        <input
-          [(ngModel)]="bookmark.title"
-          name="title"
-          class="input-bookmark-title"
-        />
+        <input [(ngModel)]="bookmark.url" name="url" class="input-bookmark-url" />
+        <input [(ngModel)]="bookmark.highlights.title[0]" name="title" class="input-bookmark-title" />
       </div>
       <div class="row description-container">
         <div class="row description-content">
-          <textarea
-            [(ngModel)]="bookmark.description"
-            name="description"
-            class="input-bookmark-description"
-          >
+          <textarea [(ngModel)]="bookmark.description" name="description" class="input-bookmark-description">
           </textarea>
         </div>
       </div>
       <div class="col-2">
         <div class="btn-group buttons">
-          <button
-            type="button"
-            (click)="updateBookmark(); setEditMode(false)"
-            class="btn btn-secondary btn-sm"
-          >
+          <button type="button" (click)="updateBookmark(); setEditMode(false)" class="btn btn-secondary btn-sm">
             Save
           </button>
-          <button
-            type="button"
-            (click)="setEditMode(false)"
-            class="btn btn-secondary btn-sm"
-          >
+          <button type="button" (click)="setEditMode(false)" class="btn btn-secondary btn-sm">
             Cancel
           </button>
         </div>
@@ -44,16 +24,17 @@
     </div>
     <ng-template #viewModeBlock>
       <div class="row">
-        <a class="bookmark-title" href="{{ bookmark.url }}" target="_blank">
-          {{ bookmark.title }}</a
-        >
+        <a class="bookmark-title" href="{{ bookmark.url }}" target="_blank"
+          [innerHtml]="(bookmark.highlights && bookmark.highlights.title) ? bookmark.highlights.title[0] :  bookmark.title">
+        </a>
       </div>
       <div class="row description-container">
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>Show description</mat-panel-title>
           </mat-expansion-panel-header>
-          <p>{{ bookmark.description }}</p>
+          <p [innerHtml]="(bookmark.highlights && bookmark.highlights.description) ? bookmark.highlights.description[0] :
+            bookmark.description"></p>
         </mat-expansion-panel>
       </div>
       <div class="row tags">
@@ -71,18 +52,10 @@
         </div>
         <div class="offset-8 col-2">
           <div class="btn-group buttons">
-            <button
-              type="button"
-              (click)="deleteBookmark()"
-              class="btn btn-secondary btn-sm"
-            >
+            <button type="button" (click)="deleteBookmark()" class="btn btn-secondary btn-sm">
               <fa-icon [icon]="faTrashAlt"></fa-icon>
             </button>
-            <button
-              type="button"
-              (click)="setEditMode(true)"
-              class="btn btn-secondary btn-sm"
-            >
+            <button type="button" (click)="setEditMode(true)" class="btn btn-secondary btn-sm">
               <fa-icon [icon]="faEdit"></fa-icon>
             </button>
           </div>

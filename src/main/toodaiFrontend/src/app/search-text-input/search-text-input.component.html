@@ -1,0 +1,8 @@
+<mat-form-field class="searchTextInput" appearance="outline">
+  <input matInput #bookmarksSearch maxlength="256" placeholder="Search for bookmarks..." [(ngModel)]="searchText"
+    (change)='searchBookmarks()'>
+  <button mat-button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="searchText=''">
+    <mat-icon>close</mat-icon>
+  </button>
+  <mat-icon *ngIf="!searchText" matSuffix>search</mat-icon>
+</mat-form-field>

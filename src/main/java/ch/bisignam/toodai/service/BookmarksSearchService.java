@@ -54,10 +54,11 @@ public class BookmarksSearchService {
       tagsAndTextQuery = tagsAndTextQuery.must(QueryBuilders.termsQuery("tags", tags));
     }
     Query query = new NativeSearchQueryBuilder().withPageable(
-            Pageable.ofSize(pageSize).withPage(page))
+        Pageable.ofSize(pageSize).withPage(page))
         .withQuery(tagsAndTextQuery)
         .withHighlightFields(
-            new HighlightBuilder.Field("title"), new HighlightBuilder.Field("description"))
+            new HighlightBuilder.Field("title").preTags("<b>").postTags("</b>"),
+            new HighlightBuilder.Field("description").preTags("<b>").postTags("</b>"))
         .build();
     SearchHits<Bookmark> searchHits = elasticsearchOperations
         .search(query, Bookmark.class, IndexCoordinates.of(BOOKMARKS_INDEX));

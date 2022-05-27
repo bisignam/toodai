@@ -25,7 +25,7 @@ export class AppComponent {
     private utilitiesService: UtilitiesService,
     public dialog: MatDialog,
     public bookmarkService: BookmarkService
-  ) {}
+  ) { }
 
   @HostListener('document:click', ['$event'])
   documentClick(event: any): void {
