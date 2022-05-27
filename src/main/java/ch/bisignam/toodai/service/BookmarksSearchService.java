@@ -6,7 +6,9 @@ import ch.bisignam.toodai.dto.BookmarkDTO;
 import ch.bisignam.toodai.model.elastic.Bookmark;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.lucene.util.automaton.RegExp;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.TermsQueryBuilder;
@@ -15,6 +17,8 @@ import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.bucket.terms.IncludeExclude;
 import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.jetbrains.annotations.Nullable;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,17 +47,23 @@ public class BookmarksSearchService {
   }
 
   public Page<BookmarkDTO> searchBookmarks(List<String> tags, String text, int page, int pageSize) {
-    MultiMatchQueryBuilder matchQueryBuilder = QueryBuilders
+    MultiMatchQueryBuilder titleAndDescriptionQuery = QueryBuilders
         .multiMatchQuery(text, "title", "description");
-    TermsQueryBuilder termsQueryBuilder = QueryBuilders.termsQuery("tags", tags);
+    BoolQueryBuilder tagsAndTextQuery = QueryBuilders.boolQuery().must(titleAndDescriptionQuery);
+    if (!CollectionUtils.isEmpty(tags)) {
+      tagsAndTextQuery = tagsAndTextQuery.must(QueryBuilders.termsQuery("tags", tags));
+    }
     Query query = new NativeSearchQueryBuilder().withPageable(
             Pageable.ofSize(pageSize).withPage(page))
-        .withQuery(QueryBuilders.boolQuery().must(matchQueryBuilder).must(termsQueryBuilder))
+        .withQuery(tagsAndTextQuery)
+        .withHighlightFields(
+            new HighlightBuilder.Field("title"), new HighlightBuilder.Field("description"))
         .build();
     SearchHits<Bookmark> searchHits = elasticsearchOperations
         .search(query, Bookmark.class, IndexCoordinates.of(BOOKMARKS_INDEX));
     return SearchHitSupport.searchPageFor(searchHits, query.getPageable()).map(
-        bookmarkSearchHit -> modelMapper.map(bookmarkSearchHit.getContent(), BookmarkDTO.class));
+        bookmarkSearchHit -> modelMapper.map(bookmarkSearchHit.getContent(), BookmarkDTO.class)
+            .withHighlights(bookmarkSearchHit.getHighlightFields()));
   }
 
   public List<String> fetchTagSuggestions(String tag) {

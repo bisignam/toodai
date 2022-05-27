@@ -5,9 +5,10 @@ import { Bookmark } from './bookmark';
 
 @Injectable()
 export class BookmarkService {
-  private baseBookmarksUrl = '/api/bookmarks/';
+  private baseBookmarksUrl = '/bookmarks/';
+  private baseBookmarksSearchUrl = `${this.baseBookmarksUrl}search`;
   private mayBookmarksUrl = this.baseBookmarksUrl + 'myBookmarks';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.message || error);
@@ -50,6 +51,19 @@ export class BookmarkService {
       .toPromise()
       .then((response: any) => {
         return response;
+      })
+      .catch(this.handleError);
+  }
+  suggestTags(value: string): Promise<string[]> {
+    const options = {
+      params: new HttpParams()
+        .set('tag', value)
+    };
+    return this.http
+      .get(`${this.baseBookmarksSearchUrl}/tagsSuggestions`, options)
+      .toPromise()
+      .then((response: any) => {
+        return response as string[];
       })
       .catch(this.handleError);
   }

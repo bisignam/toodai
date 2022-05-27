@@ -1,13 +1,16 @@
 package ch.bisignam.toodai.dto;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
 public class BookmarkDTO {
+
   private long id = -1;
   private String title;
   @NotEmpty
@@ -20,6 +23,8 @@ public class BookmarkDTO {
   private LocalDateTime creationDateTime;
   @NotNull
   private Boolean toRead;
+
+  private Map<String, List<String>> highlights = new HashMap<>();
 
   public long getId() {
     return id;
@@ -76,4 +81,18 @@ public class BookmarkDTO {
   public void setToRead(Boolean toRead) {
     this.toRead = toRead;
   }
+
+  public void setHighlights(Map<String, List<String>> highlights) {
+    this.highlights = highlights;
+  }
+
+  public Map<String, List<String>> getHighlights() {
+    return highlights;
+  }
+
+  public BookmarkDTO withHighlights(Map<String, List<String>> highlights) {
+    this.highlights = highlights;
+    return this;
+  }
+
 }

@@ -29,12 +29,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
-
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { DeleteBookmarkDialogComponent } from './bookmark/delete-bookmark-dialog/delete-bookmark-dialog.component';
 import { AddBookmarkDialogComponent } from './bookmark/add-bookmark-dialog/add-bookmark-dialog.component';
 import { AddBookmarkFormComponent } from './bookmark/add-bookmark-form/add-bookmark-form.component';
+import { environment } from '../environments/environment';
+import { TagsInputComponent } from './tags-input/tags-input.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -49,6 +52,7 @@ export function tokenGetter() {
     DeleteBookmarkDialogComponent,
     AddBookmarkFormComponent,
     AddBookmarkDialogComponent,
+    TagsInputComponent,
   ],
   bootstrap: [AppComponent],
   imports: [
@@ -68,11 +72,13 @@ export function tokenGetter() {
     MatInputModule,
     MatCheckboxModule,
     MatChipsModule,
+    MatSelectModule,
+    MatAutocompleteModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:8080'], //TODO parametrize
-        disallowedRoutes: ['//localhost:8080/api/users/signin'], //We don't want to send the token when logging in
+        allowedDomains: [environment.baseUrl],
+        disallowedRoutes: ['//localhost:8090/users/signin'], //We don't want to send the token when logging in
       },
     }),
     BrowserAnimationsModule,
@@ -86,4 +92,4 @@ export function tokenGetter() {
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
   ],
 })
-export class AppModule {}
+export class AppModule { }

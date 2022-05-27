@@ -54,35 +54,19 @@
       -->
       <mat-toolbar class="toodaiNavbar">
         <span>TOODAi</span>
-        <button
-          *ngIf="!authService.loggedIn()"
-          class="login-button"
-          aria-label="login button"
-          routerLink="/login"
-        >
+        <button *ngIf="!authService.loggedIn()" class="login-button" aria-label="login button" routerLink="/login">
           Login
         </button>
-        <button
-          *ngIf="authService.loggedIn()"
-          class="addurl-button"
-          aria-label="add url button"
-          (click)="addBookmark()"
-        >
+        <tags-input class="tags-input" *ngIf="authService.loggedIn()">
+        </tags-input>
+        <button *ngIf="authService.loggedIn()" class="addurl-button" aria-label="add url button"
+          (click)="addBookmark()">
           New url
         </button>
-        <button
-          mat-icon-button
-          *ngIf="authService.loggedIn()"
-          class="logout-button"
-          aria-label="logout icon"
-        >
+        <button mat-icon-button *ngIf="authService.loggedIn()" class="logout-button" aria-label="logout icon">
           <mat-icon (click)="authService.logout()">logout</mat-icon>
         </button>
-        <button
-          *ngIf="!authService.loggedIn()"
-          class="signup-button"
-          aria-label="singup button"
-        >
+        <button *ngIf="!authService.loggedIn()" class="signup-button" aria-label="singup button">
           Sign up
         </button>
       </mat-toolbar>

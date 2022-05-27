@@ -1,0 +1,17 @@
+<mat-form-field class="tags" appearance="fill">
+  <mat-label>Tags</mat-label>
+  <mat-chip-list #chipList aria-label="Tags selection">
+    <mat-chip *ngFor="let tag of tags" [selectable]="true" [removable]="true" (removed)="removeTag(tag)">
+      {{ tag }}
+      <!-- Note that in the material documentation this seems to be incorrectly wrapped by a button-->
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <input #tagsInput placeholder="New tag..." [matChipInputFor]="chipList" [matChipInputAddOnBlur]="true"
+      [formControl]="tagsCtrl" [matAutocomplete]="auto" />
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+      {{tag}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
