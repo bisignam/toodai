@@ -1,17 +1,12 @@
 <div class="offset-xl-4 col-xl-4 col">
   <div class="row">
     <div class="offset-4 offset-sm-2 offset-md-3 offset-xl-2 col">
-      <pagination-controls
-        [previousLabel]="previousLabel"
-        [nextLabel]="nextLabel"
-        [responsive]="responsive"
-        (pageChange)="getBookmarks($event, itemsPerPage)"
-      ></pagination-controls>
+      <pagination-controls [previousLabel]="previousLabel" [nextLabel]="nextLabel" [responsive]="responsive"
+        (pageChange)="getBookmarks($event, itemsPerPage)"></pagination-controls>
     </div>
   </div>
   <ul class="list-group">
-    <tod-bookmark
-      *ngFor="
+    <tod-bookmark *ngFor="
         let bookmark of bookmarks
           | paginate
             : {
@@ -19,19 +14,17 @@
                 currentPage: currentPage,
                 totalItems: totalItems
               }
-      "
-      (editModeChange)="setEditModeFalseExceptFor(bookmark.id)"
-      [bookmark]="bookmark"
-    ></tod-bookmark>
+      " (editModeChange)="setEditModeFalseExceptFor(bookmark.id)" [bookmark]="bookmark"></tod-bookmark>
   </ul>
+  <ng-template *ng-if="bookmarks.length == 0">
+    <span>
+      No result has been found, try to adjust your search parameters
+    </span>
+  </ng-template>
   <div class="row">
     <div class="offset-4 offset-sm-2 offset-md-3 offset-xl-2 col">
-      <pagination-controls
-        [previousLabel]="previousLabel"
-        [nextLabel]="nextLabel"
-        [responsive]="responsive"
-        (pageChange)="getBookmarks($event, itemsPerPage)"
-      ></pagination-controls>
+      <pagination-controls [previousLabel]="previousLabel" [nextLabel]="nextLabel" [responsive]="responsive"
+        (pageChange)="getBookmarks($event, itemsPerPage)"></pagination-controls>
     </div>
   </div>
 </div>

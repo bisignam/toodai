@@ -22,6 +22,9 @@ export class SearchTextInputComponent {
   }
 
   searchBookmarks() {
-    this.bookmarkService.searchBookmarks(this.searchText, 0, 20);
+    this.bookmarkService.searchBookmarks(this.searchText, 0, 20); //use the pageSize configured by the user
+  }
+  clearSearch() {
+    this.bookmarkService.searchBookmarks('', 0, 20); //TODO use the pageSize configured by the user
   }
 }

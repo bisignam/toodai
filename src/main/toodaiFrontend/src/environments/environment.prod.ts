@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  basUri: 'http://prod/',
+  basUri: 'http://prod',
 };

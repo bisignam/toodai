@@ -8,7 +8,7 @@ import { Observable, Subject } from 'rxjs';
 export class BookmarkService {
   private searchText: string = '';
   private bookmarksSubject: Subject<Promise<BookmarksResponse>> = new Subject();
-  private baseBookmarksUrl = '/bookmarks/';
+  private baseBookmarksUrl = '/api/bookmarks/';
   private baseBookmarksSearchUrl = `${this.baseBookmarksUrl}search`;
   private mayBookmarksUrl = this.baseBookmarksUrl + 'myBookmarks';
 
