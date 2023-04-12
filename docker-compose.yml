@@ -38,14 +38,14 @@ services:
     volumes:
       - elastic:/usr/share/elasticsearch/data
     ports:
-      - 9200:9200
+      - "9200:9200"
     networks:
       - toodai
 
   kib01:
     image: docker.elastic.co/kibana/kibana-oss:7.10.2
     ports:
-      - 5601:5601
+      - "5601:5601"
     environment:
       ELASTICSEARCH_URL: http://es01:9200
       ELASTICSEARCH_HOSTS: '["http://es01:9200"]'
@@ -55,7 +55,7 @@ services:
   monstache:
     image: rwynn/monstache:latest
     working_dir: /docker/monstache
-    command: -f ./config.toml
+    command: -f config.toml
     volumes:
       - ./monstache:/monstache/
     ports:
@@ -71,6 +71,8 @@ services:
     depends_on:
       - mongo
       - es01
+    ports:
+      - "8080:8080"
     networks:
       - toodai
 
