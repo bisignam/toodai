@@ -4,8 +4,7 @@ services:
 
   mongo:
     build:
-      dockerfile: Dockerfile
-      context: mongo
+      context: docker/mongo
     restart: always
     ports:
       - 27017:27017
@@ -28,7 +27,7 @@ services:
     environment:
       - node.name=es01
       - cluster.name=es-toodai-cluster
-     # - discovery.seed_hosts=es02,es03 //for the moment we don't need a cluster
+      # - discovery.seed_hosts=es02,es03 //for the moment we don't need a cluster
       - cluster.initial_master_nodes=es01
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -55,13 +54,23 @@ services:
 
   monstache:
     image: rwynn/monstache:latest
-    working_dir: /monstache
+    working_dir: /docker/monstache
     command: -f ./config.toml
     volumes:
       - ./monstache:/monstache/
     ports:
       - "8081:8080"
     restart: always
+    networks:
+      - toodai
+
+  toodai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo
+      - es01
     networks:
       - toodai
 

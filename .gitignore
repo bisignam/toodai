@@ -23,4 +23,4 @@ dist/
 nbdist/
 .nb-gradle/
 .vscode/settings.json
-/src/main/resources/docker/data/
+/docker/data/
