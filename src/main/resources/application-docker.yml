@@ -1,0 +1,35 @@
+spring:
+  tomcat:
+    max-wait: 20000
+    max-active: 50
+    max-idle: 20
+    min-idle: 15
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 11MB
+  data:
+    mongodb:
+      host: mongo
+      port: 27017
+      database: toodai
+      authentication-database: toodai
+      username: toodai
+      password: toodai
+      replica-set-name: toodaiReplicaSet
+  elasticsearch:
+    rest:
+      uris: http://es01:9200
+      username: elastic
+      password: password
+# Elastic search rest client trace logging, it logs all requests in curl format, enable only in dire situations
+#logging:
+#  level:
+#    tracer: TRACE
+server:
+  port: 8080
+security:
+  jwt:
+    token:
+      secret-key: secret-key
+      expire-length: 300000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
