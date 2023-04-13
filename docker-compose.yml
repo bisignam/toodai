@@ -54,27 +54,48 @@ services:
 
   monstache:
     image: rwynn/monstache:latest
-    working_dir: /docker/monstache
+    working_dir: /monstache
     command: -f config.toml
     volumes:
-      - ./monstache:/monstache/
+      - /docker/monstache:/monstache
     ports:
       - "8081:8080"
     restart: always
     networks:
       - toodai
 
-  toodai:
+  toodai-prod:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker-prod"
     depends_on:
       - mongo
       - es01
     ports:
       - "8080:8080"
+    profiles:
+      - prod
     networks:
       - toodai
+
+  toodai-int:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker-int"
+    depends_on:
+      - mongo
+      - es01
+    ports:
+      - "8080:8080"
+    profiles:
+      - int
+    networks:
+      - toodai
+
 
 volumes:
   mongo:

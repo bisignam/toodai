@@ -10,7 +10,7 @@ spring:
       max-request-size: 11MB
   data:
     mongodb:
-      host: localhost
+      host: mongo
       port: 27017
       database: toodai
       authentication-database: toodai
@@ -19,7 +19,7 @@ spring:
       replica-set-name: toodaiReplicaSet
   elasticsearch:
     rest:
-      uris: http://localhost:9200
+      uris: http://es01:9200
       username: elastic
       password: password
 # Elastic search rest client trace logging, it logs all requests in curl format, enable only in dire situations
@@ -36,4 +36,4 @@ security:
 
 # Client url for CORS
 client:
-  url: http://localhost:4200
+  url: http://172.105.93.118:8001/
