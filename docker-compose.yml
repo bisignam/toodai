@@ -57,7 +57,7 @@ services:
     working_dir: /monstache
     command: -f config.toml
     volumes:
-      - /docker/monstache:/monstache
+      - ./docker/monstache:/monstache
     ports:
       - "8081:8080"
     restart: always
