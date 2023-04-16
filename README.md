@@ -91,14 +91,7 @@ Once nvm is installed you can install nodejs with
 nvm install 16
 ```
 
-Once you have nodejs installed you can install angular-cli with
-
-```console
-npm install -g @angular/cli@11.2.3
-```
-
-Go to src/main/toodaifrontend and run
-
+To build the frontend then go to src/main/toodaifrontend and run
 ```console
 npm run build
 ```
