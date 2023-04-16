@@ -1,17 +1,31 @@
 # Toodai
+Minimalistic, bloat-free, personal bookmarks organizer and search engine for the busy developer.
 
-Toodai is an open source social bookmarking web application.
-The word Toodai is an english adaptation of the japanese word 灯台 which roughly translates to lighthouse.
+# What is it?
+***Toodai*** is an open source social bookmarking web application.
+The word Toodai is an english adaptation of the japanese word 灯台, which roughly translates to lighthouse.
 
-The projects aims to be a flexible and lightweight solution to easily share and explore bookmarks.
+The project aims to be a flexible and lightweight solution to easily share and explore bookmarks.
+The application is specifically targeted at developers and tech enthusiasts that often need to organize and find back links to confluence pages, issue trackers, company wikis and several other resources.
 
-# Development setup
+One of the key features of Toodai is the abilty to quickly perform full text queries on your personal bookmarks, allowing developers to esily find resources without using clumsy/slow systems like standard browsers bookmarks and folders.
 
-In order to compile and run toodai you need:
+# Backend development setup
 
+## Pre-requisites
+
+* [docker](https://www.docker.com/) installed (see [docker installation documentation](https://docs.docker.com/engine/install/) for details on how to install it)
+* [docker-compose](https://docs.docker.com/compose/) installed (see [docker-compose installation documentation](https://docs.docker.com/compose/install/other/) for details on how to install it)
 * java jdk version >= 11
 
-## Compile the backed
+## Additional setup for the elasticsearch container
+
+```
+sudo sh -c 'echo 'vm.max_map_count=262144' > /etc/sysctl.conf'
+sudo sysctl -p
+```
+
+## Build the backend
 
 Go to the root of the project and run
 
@@ -19,33 +33,12 @@ Go to the root of the project and run
 ./mvnw clean package
 ```
 
-If you want to skip the tests
-
+Alternatively, if you don't want to run the tests, you can run
 ```console 
 ./mvnw clean package -DskipTests
 ```
 
 ## Run the backend
-
-### Pre-requisites
-
-* `docker` installed (see [docker installation documentation](https://docs.docker.com/engine/install/) for details on how to install it)
-* `docker-compose` installed (see [docker-compose installation documentation](https://docs.docker.com/compose/install/other/) for details on how to install it)
-
-
-### Increase vm.max_map_count
-
-This step is needed in order to properly run the Elastcsearch containerm run:
-
-```
-sudo sh -c 'echo 'vm.max_map_count=262144' > /etc/sysctl.conf'
-sudo sysctl -p
-```
-
-Then run `sudo sysctl -p`
-
-
-### Spawn the required containers
 
 Go to the root of the project and run
 
@@ -53,53 +46,44 @@ Go to the root of the project and run
 docker-compose --profile local up -d --build
 ```
 
-The previous command will launch all the required containers in the background and build the images if needed.
+> The previous command will launch all the required containers in the background and build the images if needed.
 It will not start the application though, just the dependencies.
 
-
-### Launch the server
-
-Go to the root of the project and run
+To run the main application, go to the root of the project and run
     
 ```console
 ./mvnw spring-boot:run -Dspring-boot.run.profiles=local
 ```
 
-
-# Swagger UI
-
-Once the project is up and running you can access the swagger ui at:
-
-http://localhost:8080/swagger-ui.html#/
-
-
-## Compile the frontend
+# Frontend development setup
 
 ### Prerequisites
 
-* nodejs version >= 16 (see [nodejs installation documentation](https://nodejs.org/en/download/) if you are  interested in further installation details)
+* [nodejs](https://nodejs.org/) >= 16 (see [nodejs installation documentation](https://nodejs.org/en/download/) if you are  interested in further installation details)
 
-The easiest way to install nodejs is to use nvm (node version manager) which can be installed with
+The easiest way to install nodejs is to use [nvm](https://github.com/nvm-sh/nvm), which can be installed with
 
 ```console
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 ```
 
-Once nvm is installed you can install nodejs with
+Once nvm is installed you can install nodejs version 16 with
 
 ```console
 nvm install 16
 ```
 
-To build the frontend then go to src/main/toodaifrontend and run
+Then to build the frontend, go to `src/main/toodaifrontend` and run
 ```console
 npm run build
 ```
 
-## Run the frontend
-
-Go to src/main/toodaifrontend and run
+Then to run the frontend, go to `src/main/toodaifrontend` and run
 
 ```console
 npm run start
 ```
+
+# Swagger UI
+
+Once the backend is up and running, you can access the swagger ui at `http://localhost:8080/swagger-ui.html#/`.
