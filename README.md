@@ -14,9 +14,11 @@ One of the key features of Toodai is the abilty to quickly perform full text que
 
 ## Pre-requisites
 
+### Install docker and docker-compose
+
 * [docker](https://www.docker.com/) installed (see [docker installation documentation](https://docs.docker.com/engine/install/) for details on how to install it)
 * [docker-compose](https://docs.docker.com/compose/) installed (see [docker-compose installation documentation](https://docs.docker.com/compose/install/other/) for details on how to install it)
-* java jdk version >= 11
+* java jdk version >= 11 (the easiest way to install java is to use [sdkman](https://sdkman.io/install))
 
 ## Additional setup for the elasticsearch container
 
@@ -24,6 +26,8 @@ One of the key features of Toodai is the abilty to quickly perform full text que
 sudo sh -c 'echo 'vm.max_map_count=262144' > /etc/sysctl.conf'
 sudo sysctl -p
 ```
+
+> The previous commands are required to run the elasticsearch container on linux. See [this link](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-prod-prerequisites) for more details.
 
 ## Build the backend
 
